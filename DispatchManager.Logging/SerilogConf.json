@@ -1,0 +1,33 @@
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "./Log/Serilog/Logs_.txt",
+          "rollingInterval": "Day",
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
+          "encoding": "System.Text.Encoding::UTF8"
+        }
+      },
+      {
+        "Name": "SQLite",
+        "Args": {
+          "databasePath": "./DB/DispatchManagerLog.db",
+          "tableName": "Log"
+        }
+      }
+    ],
+    "Enrich": ["FromLogContext"]
+  }
+}

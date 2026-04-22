@@ -1,0 +1,292 @@
+﻿.DispatchClassName {
+    font-size: 20px;
+}
+
+/* ============================================
+   动画效果
+   ============================================ */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ============================================
+   玻璃变型效果
+   ============================================ */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================
+   阴影和边框工具类
+   ============================================ */
+.shadow-soft {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.border-soft {
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* 页面特定的样式 */
+.page-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   统计卡片网格布局
+   ============================================ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #64748b;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   信息提示区域
+   ============================================ */
+.info-section {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid #bae6fd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.info-section h6 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-section h6:first-child {
+    margin-top: 0;
+}
+
+/* ============================================
+   表格容器和组件间距
+   ============================================ */
+.table-wrapper {
+    margin-top: 2.5rem;
+}
+
+.stat-card-item {
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.stat-card-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: #3b82f6;
+}
+
+.stat-value {
+    color: #1e40af;
+    line-height: 1.2;
+    font-size: 2rem;
+}
+
+.stat-system-card .stat-value {
+    color: #0f172a;
+    font-size: 1.8rem;
+}
+
+.stat-system-card .text-muted {
+    color: #64748b;
+    font-size: 0.875rem;
+}
+.table-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.table-header {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    padding: 1.5rem;
+    margin: 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table-header h5 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.status-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   BootstrapBlazor Table 组件微调
+   ============================================ */
+:deep(.table) {
+    margin-bottom: 0;
+}
+
+:deep(.table thead th) {
+    padding: 1.25rem 0.75rem !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #f8fafc;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+:deep(.table tbody td) {
+    padding: 1rem 0.75rem !important;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+:deep(.table tbody tr) {
+    transition: background-color 0.2s ease;
+    height: auto;
+}
+
+:deep(.table tbody tr:hover) {
+    background-color: #f0f9ff;
+}
+
+:deep(.bb-table-container) {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* ============================================
+   响应式断点调整
+   ============================================ */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        padding: 1.5rem;
+    }
+
+    .stats-grid {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        padding: 1rem 0;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .info-section {
+        padding: 1rem;
+    }
+
+    .table-header {
+        padding: 1rem;
+    }
+
+    .table-wrapper {
+        margin-top: 1.5rem;
+    }
+}
