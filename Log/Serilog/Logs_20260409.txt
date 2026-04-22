@@ -1,0 +1,54 @@
+﻿2026-04-09 17:36:22.731 +08:00 [INF] Serilog配置成功，日志系统已初始化
+2026-04-09 17:36:27.190 +08:00 [ERR] unable to open database file
+System.Exception: unable to open database file
+ ---> code = CantOpen (14), message = System.Data.SQLite.SQLiteException (0x87AF03F3): unable to open database file
+   at System.Data.SQLite.SQLite3.Open(String strFilename, String vfsName, SQLiteConnectionFlags connectionFlags, SQLiteOpenFlagsEnum openFlags, Int32 maxPoolSize, Boolean usePool)
+   at System.Data.SQLite.SQLiteConnection.Open()
+   at FreeSql.Sqlite.DbConnectionExtensions.OpenAndAttach(DbConnection that, String[] attach)
+   at FreeSql.Sqlite.SqliteConnectionPoolPolicy.OnGet(Object`1 obj)
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.Get(Nullable`1 timeout)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteScalar(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, Int32 cmdTimeout, DbParameter[] cmdParms)
+   --- End of inner exception stack trace ---
+   at FreeSql.Internal.CommonProvider.AdoProvider.LoggerException(IObjectPool`1 pool, PrepareCommandResult pc, Exception ex, DateTime dt, StringBuilder logtxt, Boolean isThrowException)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteScalar(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, Int32 cmdTimeout, DbParameter[] cmdParms)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteScalar(CommandType cmdType, String cmdText, DbParameter[] cmdParms)
+   at FreeSql.Sqlite.SqliteCodeFirst.GetComparisonDDLStatements(TypeSchemaAndName[] objects)
+   at FreeSql.Internal.CommonProvider.CodeFirstProvider.SyncStructure(TypeSchemaAndName[] objects)
+   at FreeSql.Internal.CommonProvider.CodeFirstProvider.SyncStructure[TEntity]()
+   at FreeSql.Internal.CommonProvider.Select0Provider`2..ctor(IFreeSql orm, CommonUtils commonUtils, CommonExpression commonExpression, Object dywhere)
+   at FreeSql.Internal.CommonProvider.Select1Provider`1..ctor(IFreeSql orm, CommonUtils commonUtils, CommonExpression commonExpression, Object dywhere)
+   at FreeSql.Sqlite.Curd.SqliteSelect`1..ctor(IFreeSql orm, CommonUtils commonUtils, CommonExpression commonExpression, Object dywhere)
+   at FreeSql.Sqlite.SqliteProvider`1.CreateSelectProvider[T1](Object dywhere)
+   at FreeSql.Internal.CommonProvider.BaseDbProvider.Select[T1]()
+   at DispatchManager.DataAccess.FreeSql.Service.ScheduleTaskService.<GetAllDispatchTask>b__7_0(ICacheEntry entry) in C:\Users\56574\source\repos\DispatchManager\DispatchManager.DataAccess.FreeSql\Service\ScheduleTaskService.cs:line 34
+   at Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate[TItem](IMemoryCache cache, Object key, Func`2 factory, MemoryCacheEntryOptions createOptions)
+   at Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate[TItem](IMemoryCache cache, Object key, Func`2 factory)
+   at DispatchManager.DataAccess.FreeSql.Service.ScheduleTaskService.GetAllDispatchTask() in C:\Users\56574\source\repos\DispatchManager\DispatchManager.DataAccess.FreeSql\Service\ScheduleTaskService.cs:line 31
+   at DispatchManager.DataAccess.FreeSql.Service.ScheduleTaskService.<GetAllDispatchTaskView>b__8_0(ICacheEntry entry) in C:\Users\56574\source\repos\DispatchManager\DispatchManager.DataAccess.FreeSql\Service\ScheduleTaskService.cs:line 43
+   at Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate[TItem](IMemoryCache cache, Object key, Func`2 factory, MemoryCacheEntryOptions createOptions)
+   at Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate[TItem](IMemoryCache cache, Object key, Func`2 factory)
+   at DispatchManager.DataAccess.FreeSql.Service.ScheduleTaskService.GetAllDispatchTaskView() in C:\Users\56574\source\repos\DispatchManager\DispatchManager.DataAccess.FreeSql\Service\ScheduleTaskService.cs:line 40
+   at DispatchManager.Schedule.Service.DispatchTaskService.<ExecuteAsync>b__3_0() in C:\Users\56574\source\repos\DispatchManager\DispatchManager.Schedule\Service\DispatchTaskService.cs:line 55
+2026-04-09 17:36:27.190 +08:00 [ERR] unable to open database file
+System.Exception: unable to open database file
+ ---> code = CantOpen (14), message = System.Data.SQLite.SQLiteException (0x87AF03F3): unable to open database file
+   at System.Data.SQLite.SQLite3.Open(String strFilename, String vfsName, SQLiteConnectionFlags connectionFlags, SQLiteOpenFlagsEnum openFlags, Int32 maxPoolSize, Boolean usePool)
+   at System.Data.SQLite.SQLiteConnection.Open()
+   at FreeSql.Sqlite.DbConnectionExtensions.OpenAndAttach(DbConnection that, String[] attach)
+   at FreeSql.Sqlite.SqliteConnectionPoolPolicy.OnGet(Object`1 obj)
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.Get(Nullable`1 timeout)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteScalar(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, Int32 cmdTimeout, DbParameter[] cmdParms)
+   --- End of inner exception stack trace ---
+   at FreeSql.Internal.CommonProvider.AdoProvider.LoggerException(IObjectPool`1 pool, PrepareCommandResult pc, Exception ex, DateTime dt, StringBuilder logtxt, Boolean isThrowException)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteScalar(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, Int32 cmdTimeout, DbParameter[] cmdParms)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteScalar(CommandType cmdType, String cmdText, DbParameter[] cmdParms)
+   at FreeSql.Sqlite.SqliteCodeFirst.GetComparisonDDLStatements(TypeSchemaAndName[] objects)
+   at FreeSql.Internal.CommonProvider.CodeFirstProvider.SyncStructure(TypeSchemaAndName[] objects)
+   at FreeSql.Internal.CommonProvider.CodeFirstProvider.SyncStructure[TEntity]()
+   at FreeSql.Internal.CommonProvider.Select0Provider`2..ctor(IFreeSql orm, CommonUtils commonUtils, CommonExpression commonExpression, Object dywhere)
+   at FreeSql.Internal.CommonProvider.Select1Provider`1..ctor(IFreeSql orm, CommonUtils commonUtils, CommonExpression commonExpression, Object dywhere)
+   at FreeSql.Sqlite.Curd.SqliteSelect`1..ctor(IFreeSql orm, CommonUtils commonUtils, CommonExpression commonExpression, Object dywhere)
+   at FreeSql.Sqlite.SqliteProvider`1.CreateSelectProvider[T1](Object dywhere)
+   at FreeSql.Internal.CommonProvider.BaseDbProvider.Select[T1]()
+   at DispatchManager.DataAccess.FreeSql.Service.ScheduleTaskKingDeeService.GetAllDispatchTaskKingDeeView() in C:\Users\56574\source\repos\DispatchManager\DispatchManager.DataAccess.FreeSql\Service\ScheduleTaskKingDeeService.cs:line 41
+   at DispatchManager.Schedule.Service.DispatchTaskKingDeeService.<ExecuteAsync>b__2_0() in C:\Users\56574\source\repos\DispatchManager\DispatchManager.Schedule\Service\DispatchTaskKingDeeService.cs:line 54

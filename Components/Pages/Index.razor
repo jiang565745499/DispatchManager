@@ -1,0 +1,129 @@
+﻿@page "/"
+@using DispatchManager.Utils
+@inject ILogger<Index> Log
+@attribute [TabItemOption(Text = "主页", Closable = false)]
+
+<PageTitle>调度管理系统</PageTitle>
+
+<div class="page-container">
+    <div class="content-wrapper">
+        <!-- 欢迎区域 -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary mb-3" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                调度管理系统
+            </h1>
+            <p class="lead text-muted mb-4">智能任务调度与管理系统</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <p class="text-secondary">
+                        欢迎使用调度管理系统，这里提供了强大的任务调度、日志监控和系统集成功能。
+                        通过直观的界面和现代化的设计，让任务管理变得简单高效。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能卡片 -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="modern-card h-100 p-4 text-center fade-in stat-card-item stat-card">
+                    <div class="mb-3">
+                        <i class="fas fa-tasks fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">任务调度</h5>
+                    <p class="card-text text-muted">创建和管理定时任务，支持Cron表达式，灵活配置执行时间</p>
+                    <a href="/DispatchTasks" class="modern-button-primary text-decoration-none d-inline-block mt-3">
+                        进入任务调度
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="modern-card h-100 p-4 text-center fade-in stat-card-item stat-card">
+                    <div class="mb-3">
+                        <i class="fas fa-cogs fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">任务分类</h5>
+                    <p class="card-text text-muted">对任务进行分类管理，便于组织和维护不同的业务场景</p>
+                    <a href="/DispatchClass" class="modern-button-primary text-decoration-none d-inline-block mt-3">
+                        进入任务分类
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="modern-card h-100 p-4 text-center fade-in stat-card-item stat-card">
+                    <div class="mb-3">
+                        <i class="fas fa-file-alt fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">任务日志</h5>
+                    <p class="card-text text-muted">查看任务执行日志，监控任务状态和执行结果</p>
+                    <a href="/DispatchLog" class="modern-button-primary text-decoration-none d-inline-block mt-3">
+                        查看任务日志
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 系统信息 -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="modern-card p-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-info-circle text-primary me-2"></i>
+                        系统特性
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            支持多种任务类型和触发器
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            实时监控任务执行状态
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            灵活的日志记录和查询
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            支持金蝶系统集成
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="modern-card p-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-clock text-primary me-2"></i>
+                        快速开始
+                    </h5>
+                    <div class="mb-3">
+                        <span class="modern-badge bg-primary text-white me-2">1</span>
+                        创建任务分类
+                    </div>
+                    <div class="mb-3">
+                        <span class="modern-badge bg-primary text-white me-2">2</span>
+                        配置定时任务
+                    </div>
+                    <div class="mb-3">
+                        <span class="modern-badge bg-primary text-white me-2">3</span>
+                        启动并监控
+                    </div>
+                    <div class="text-muted small">
+                        <i class="fas fa-lightbulb text-warning me-1"></i>
+                        提示：使用侧边栏导航快速切换功能模块
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    // 系统初始化代码可以在这里添加
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        // 可以在这里添加一些初始化逻辑
+    }
+}

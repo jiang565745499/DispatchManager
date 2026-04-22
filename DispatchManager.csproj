@@ -1,0 +1,80 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="DispatchManager.Caching\**" />
+		<Compile Remove="DispatchManager.DataAccess.FreeSql\**" />
+		<Compile Remove="DispatchManager.Logging\**" />
+		<Compile Remove="DispatchManager.Schedule\**" />
+		<Compile Remove="DispatchManager.Core\**" />
+		<Compile Remove="DLL\**" />
+		<Content Remove="DispatchManager.Caching\**" />
+		<Content Remove="DispatchManager.DataAccess.FreeSql\**" />
+		<Content Remove="DispatchManager.Logging\**" />
+		<Content Remove="DispatchManager.Schedule\**" />
+		<Content Remove="DispatchManager.Core\**" />
+		<Content Remove="DLL\**" />
+		<EmbeddedResource Remove="DispatchManager.Caching\**" />
+		<EmbeddedResource Remove="DispatchManager.DataAccess.FreeSql\**" />
+		<EmbeddedResource Remove="DispatchManager.Logging\**" />
+		<EmbeddedResource Remove="DispatchManager.Schedule\**" />
+		<EmbeddedResource Remove="DispatchManager.Core\**" />
+		<EmbeddedResource Remove="DLL\**" />
+		<None Remove="DispatchManager.Caching\**" />
+		<None Remove="DispatchManager.DataAccess.FreeSql\**" />
+		<None Remove="DispatchManager.Logging\**" />
+		<None Remove="DispatchManager.Schedule\**" />
+		<None Remove="DispatchManager.Core\**" />
+		<None Remove="DLL\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Remove="Components\Shared\SurveyPrompt.razor" />
+		<Content Remove="Components\Shared\Widget.razor" />
+		<Content Remove="Locales\en.json" />
+		<Content Remove="Locales\zh.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Locales\en.json" />
+		<EmbeddedResource Include="Locales\zh.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include=".github\copilot-instructions.md" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BootstrapBlazor" Version="9.1.0" />
+		<PackageReference Include="BootstrapBlazor.FontAwesome" Version="9.0.0" />
+		<PackageReference Include="BootstrapBlazor.TableExport" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.1" />
+		<PackageReference Include="MiniExcel" Version="1.43.0" />
+		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="DispatchManager.Logging\DispatchManager.Logging.csproj" />
+		<ProjectReference Include="DispatchManager.Schedule\DispatchManager.Schedule.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="Config\appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Db\DBCreate.sql">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+</Project>

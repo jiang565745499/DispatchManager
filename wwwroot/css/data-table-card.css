@@ -1,0 +1,253 @@
+/* ============================================
+   DataTableCard — 卡片式表格样式
+   参考样式: 白色卡片 + 浅灰表头 + 干净行 + 底部分页
+   ============================================ */
+
+/* ---- 卡片容器 ---- */
+.dtc-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+/* ---- 卡片头部 ---- */
+.dtc-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.dtc-card-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dtc-card-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.dtc-card-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.dtc-card-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ---- 卡片主体 ---- */
+.dtc-card-body {
+    padding: 0;
+}
+
+/* ============================================
+   BootstrapBlazor Table 组件覆盖
+   在 .dtc-card 内生效
+   ============================================ */
+
+/* 隐藏 BootstrapBlazor 默认卡片边框 */
+.dtc-card .table-wrapper,
+.dtc-card .bb-table,
+.dtc-card .bb-table-container,
+.dtc-card .table,
+.dtc-card table,
+.dtc-card .table > tbody,
+.dtc-card .table > thead,
+.dtc-card .table-container,
+.dtc-card .table-responsive,
+.dtc-card .table-wrapper > div {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* 工具栏微调 */
+.dtc-card .table-toolbar {
+    padding: 0 24px 20px !important;
+    border-bottom: none !important;
+    background: transparent !important;
+    margin-bottom: 8px !important;
+}
+
+.dtc-card .table-toolbar .btn {
+    border-radius: 8px;
+    font-size: 0.875rem;
+}
+
+/* 搜索栏微调 */
+.dtc-card .table-search {
+    border-bottom: none !important;
+    padding: 0 24px 8px !important;
+}
+
+/* ---- 表头 ---- */
+.dtc-card .table thead th {
+    background: #f8fafc !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    padding: 14px 16px !important;
+    border: none !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+}
+
+/* ---- 表体 ---- */
+.dtc-card .table tbody td {
+    padding: 16px 16px !important;
+    border: none !important;
+    border-bottom: 1px solid #f8f8f8 !important;
+    font-size: 0.9rem;
+    color: #334155;
+    vertical-align: middle;
+}
+
+.dtc-card .table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.dtc-card .table tbody tr:hover {
+    background-color: #fafbfc !important;
+}
+
+.dtc-card .table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+/* ---- 分页栏 ---- */
+.dtc-card .table-pagination {
+    border-top: 1px solid #f0f0f0 !important;
+    padding: 12px 24px !important;
+    background: #fff !important;
+}
+
+/* 分页信息 */
+.table-page-info {
+    margin: 10px !important;
+}
+
+.dtc-card .table-pagination .pagination .page-link {
+    border-radius: 6px;
+    margin: 0 2px;
+    font-size: 0.85rem;
+    min-width: 34px;
+    text-align: center;
+    border-color: #e2e8f0;
+    color: #475569;
+}
+
+.dtc-card .table-pagination .pagination .page-item.active .page-link {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+    font-weight: 600;
+}
+
+.dtc-card .table-pagination .pagination .page-link:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+/* ============================================
+   表格内常用徽章 / 标签 / 状态样式
+   ============================================ */
+
+/* 类型标签 (如 NEED / Cron) */
+.dtc-type-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+/* 状态点 */
+.dtc-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    color: #334155;
+}
+
+.dtc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.dtc-dot-success  { background: #22c55e; }
+.dtc-dot-running  { background: #22c55e; }
+.dtc-dot-warning  { background: #f59e0b; }
+.dtc-dot-danger   { background: #ef4444; }
+.dtc-dot-disabled { background: #94a3b8; }
+.dtc-dot-info     { background: #3b82f6; }
+.dtc-dot-ready    { background: #f59e0b; }
+
+/* 操作链接按钮 */
+.dtc-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #2563eb;
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 4px 10px;
+    border: 1px solid #dbeafe;
+    border-radius: 6px;
+    background: #eff6ff;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.dtc-action-btn:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+}
+
+/* ============================================
+   响应式
+   ============================================ */
+@media (max-width: 768px) {
+    .dtc-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dtc-card-header-right {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .dtc-card {
+        border-radius: 12px;
+    }
+}

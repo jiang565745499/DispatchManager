@@ -1,0 +1,42 @@
+﻿@inject DispatchManager.DataAccess.FreeSql.Service.DispatchClassService MainDb
+
+<div class="row g-3 form-inline">
+    <div class="col-12">
+        <BootstrapInput  @bind-Value="@Value.Name" />
+    </div>
+    <div class="col-12">
+        <Select @bind-Value="@Value.ClassID" Items="Items" />
+    </div>
+    <div class="col-12">
+        <BootstrapInputNumber @bind-Value="@Value.TimeNumber" />
+
+        <Select @bind-Value="@Value.TimeType" Items="ItemCronSelect" />
+
+        <div class="col-6 "><Button IsOutline="true" OnClick="() => OnCreateCron(Value)" Color="Color.Primary">生成Cron</Button></div>
+
+    </div>
+    <div class="col-12">
+        <BootstrapInput @bind-Value="@Value.Trigger" />
+        <button type="button" class="btn btn-primary" @onclick="@(e => IsOpen = true)">获取Cron</button>
+        <Drawer IsBackdrop="true" OnCloseAsync="()=>OnCloseDrawer()" Placement="Placement.Right" IsOpen="@IsOpen" AllowResize="true">
+            <div class="d-flex justify-content-center align-items-center flex-column" style="height: 100%;--bb-drawer-width: 500px;">
+                <IFrame Src="https://cron.qqe2.com/"></IFrame>
+            </div>
+        </Drawer>
+    </div>
+    <div class="col-12">
+        <BootstrapInput @bind-Value="@Value.ReturnApiUrl" />
+    </div>
+    <div class="col-12">
+        <BootstrapInput @bind-Value="@Value.KingDeeFormId" />
+    </div>
+    <div class="col-12">
+        <BootstrapInput @bind-Value="@Value.KingDeeFields" />
+    </div>
+    <div class="col-12">
+        <BootstrapInput @bind-Value="@Value.KingDeeFilterString" />
+    </div>
+    <div class="col-12">
+        <Switch ValueChanged="()=>OnValueChanged(Value)" Value="@Value.IsLog" OnColor="Color.Success" OnText="开启日志" OffText="关闭日志"></Switch>
+    </div>
+</div>

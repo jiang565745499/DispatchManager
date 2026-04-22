@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <BaseOutputPath></BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DispatchManager.Logging\DispatchManager.Logging.csproj" />
+    <ProjectReference Include="..\DispatchManager.DataAccess.FreeSql\DispatchManager.DataAccess.FreeSql.csproj" />
+    <ProjectReference Include="..\DispatchManager.Schedule\DispatchManager.Schedule.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+</Project>

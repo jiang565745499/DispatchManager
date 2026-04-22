@@ -1,0 +1,277 @@
+@page "/DispatchLog"
+@inject DispatchManager.DataAccess.FreeSql.Service.ScheduleTaskService MainDb
+@inject DispatchManager.DataAccess.FreeSql.Service.ScheduleTaskKingDeeService MainDbKingDee
+@inject DispatchManager.DataAccess.FreeSql.Service.SqliteLogService LogDb
+
+<PageTitle>任务日志</PageTitle>
+
+<div class="page-container">
+    <div class="content-wrapper">
+        <!-- 页面标题 -->
+        @* <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-1 gradient-text">
+                    <i class="fas fa-file-alt text-primary me-2"></i>
+                    任务日志管理
+                </h2>
+                <p class="text-muted mb-0">查看和分析系统任务的执行日志</p>
+            </div>
+            <div class="text-end">
+                <small class="text-muted">
+                    <i class="fas fa-clock me-1"></i>
+                    最后更新: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                </small>
+            </div>
+        </div> *@
+
+        <!-- 统计卡片 -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="modern-card p-4 text-center fade-in stat-card-item">
+                    <div class="mb-3">
+                        <i class="fas fa-file-alt fa-3x text-primary"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2 stat-value">@(LogDb?.GetAllLog()?.Count() ?? 0)</h4>
+                    <small class="text-muted fw-500">总日志数</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="modern-card p-4 text-center fade-in stat-card-item">
+                    <div class="mb-3">
+                        <i class="fas fa-exclamation-triangle fa-3x text-danger"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2 stat-value">@(LogDb?.GetAllLog()?.Count(l => l.Level?.ToLower() == "error") ?? 0)</h4>
+                    <small class="text-muted fw-500">错误日志</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="modern-card p-4 text-center fade-in stat-card-item">
+                    <div class="mb-3">
+                        <i class="fas fa-info-circle fa-3x text-info"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2 stat-value">@(LogDb?.GetAllLog()?.Count(l => l.Level?.ToLower() == "information") ?? 0)</h4>
+                    <small class="text-muted fw-500">信息日志</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="modern-card p-4 text-center fade-in stat-card-item">
+                    <div class="mb-3">
+                        <i class="fas fa-exclamation-circle fa-3x text-warning"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2 stat-value">@(LogDb?.GetAllLog()?.Count(l => l.Level?.ToLower() == "warn") ?? 0)</h4>
+                    <small class="text-muted fw-500">警告日志</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 日志说明卡片 -->
+        
+
+        <!-- 数据表格 -->
+        <div class="dtc-card fade-in">
+            <div class="dtc-card-header">
+                <div class="dtc-card-header-left">
+                    <h5 class="dtc-card-title">系统日志列表</h5>
+                </div>
+                <div class="dtc-card-header-right">
+                    <button class="btn btn-success btn-sm" @onclick="@ExportLogsToExcel">
+                        <i class="fas fa-file-excel me-1"></i>导出Excel
+                    </button>
+                    <button class="btn btn-info btn-sm" @onclick="@ExportLogsToCsv">
+                        <i class="fas fa-file-csv me-1"></i>导出CSV
+                    </button>
+                </div>
+            </div>
+            <div class="dtc-card-body">
+                <Table TItem="Log"
+                       IsFixedHeader="false"
+                       SortString="Timestamp desc"
+                       IsPagination="true" PageItemsSource="@PageItemsSource"
+                       ShowExtendButtons="false"
+                       IsAutoRefresh="false"
+                       ShowExportButton="false"
+                       ShowToolbar="true" ShowDefaultButtons="false"
+                       ShowSearch="true"
+                       IsMultipleSelect="false"
+                       SelectedRows="SelectedRows"
+                       OnQueryAsync="OnQueryAsync">
+                    <TableColumns>
+                        <TableColumn @bind-Field="@context.Date"
+                                     Sortable="false" Filterable="false"
+                                     FormatString="yyyy-MM-dd HH:mm:ss"
+                                     Width="170">
+                            <Template Context="v">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-calendar text-muted me-2"></i>
+                                    <small class="fw-bold">@v.Value</small>
+                                </div>
+                            </Template>
+                        </TableColumn>
+
+                        <TableColumn @bind-Field="@context.Level"
+                                     Text="级别"
+                                     Sortable="true" Filterable="false"
+                                     Width="90">
+                            <Template Context="v">
+                                <Tag Color="@GetLevelColor(v.Value)">
+                                    @switch (v.Value?.ToLower())
+                                {
+                                    case "error":
+                                    case "fatal":
+                                        <i class="fas fa-exclamation-triangle me-1"></i>
+                                        break;
+                                    case "warn":
+                                    case "warning":
+                                        <i class="fas fa-exclamation-circle me-1"></i>
+                                        break;
+                                    case "info":
+                                    case "information":
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        break;
+                                    case "debug":
+                                        <i class="fas fa-bug me-1"></i>
+                                        break;
+                                    default:
+                                        <i class="fas fa-question me-1"></i>
+                                        break;
+                                }
+                                    @(v.Value ?? "-")
+                                </Tag>
+                            </Template>
+                        </TableColumn>
+
+                        <TableColumn @bind-Field="@context.TaskID"
+                                     Text="任务名称"
+                                     Sortable="false" Filterable="false"
+                                     Width="180">
+                            <Template Context="v">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-tasks text-muted me-2"></i>
+                                    <span>@GetTaskName(v.Value)</span>
+                                </div>
+                            </Template>
+                        </TableColumn>
+
+                        <TableColumn @bind-Field="@context.Message"
+                                     Text="日志消息"
+                                     Searchable="true" Filterable="false"
+                                     TextWrap="true"
+                                     Width="320">
+                            <Template Context="v">
+                                <div class="d-flex align-items-start">
+                                    <i class="fas fa-comment text-muted me-2 mt-1"></i>
+                                    <div class="flex-fill">
+                                        @if (!string.IsNullOrEmpty(v.Value))
+                                        {
+                                            <div class="text-break">@v.Value</div>
+                                            @if (v.Value.Length > 100)
+                                            {
+                                                <small class="text-muted">
+                                                    <i class="fas fa-expand-arrows-alt me-1"></i>
+                                                    长文本内容
+                                                </small>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="text-muted">无日志内容</div>
+                                        }
+                                    </div>
+                                </div>
+                            </Template>
+                        </TableColumn>
+
+                        <TableColumn @bind-Field="@context.Exception"
+                                     Text="异常信息"
+                                     Filterable="false"
+                                     TextWrap="true"
+                                     Width="280">
+                            <Template Context="v">
+                                @if (!string.IsNullOrEmpty(v.Value))
+                                {
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-exclamation-triangle text-danger me-2 mt-1"></i>
+                                        <div class="flex-fill">
+                                            <div class="text-break text-danger small">@v.Value</div>
+                                            <small class="text-muted">
+                                                <i class="fas fa-bug me-1"></i>
+                                                异常详情
+                                            </small>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        <i class="fas fa-check me-1"></i> 无异常
+                                    </span>
+                                }
+                            </Template>
+                        </TableColumn>
+                    </TableColumns>
+                </Table>
+
+                @if (_lastQueryIsSearch && _lastQueryTotalCount == 0)
+                {
+                    <div class="alert alert-warning mt-3 mb-0 d-flex align-items-center" role="alert">
+                        <i class="fas fa-search-minus me-2"></i>
+                        <div>
+                            未找到与关键词“@_lastSearchKeyword”相关的日志记录或任务名称，请尝试更短关键词或清空搜索。
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="modern-card p-5 mb-5 slide-in-left info-section">
+            <div class="d-flex align-items-center mb-4">
+                <i class="fas fa-info-circle text-primary me-2 fa-lg"></i>
+                <h5 class="fw-bold mb-0">日志说明</h5>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-primary mb-2">
+                            <i class="fas fa-exclamation-triangle text-danger me-1"></i>
+                            错误级别 (ERROR)
+                        </h6>
+                        <p class="text-muted small mb-0">任务执行失败、系统异常等严重问题</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-warning mb-2">
+                            <i class="fas fa-exclamation-circle text-warning me-1"></i>
+                            警告级别 (WARN)
+                        </h6>
+                        <p class="text-muted small mb-0">潜在问题、性能警告等需要注意的情况</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-info mb-2">
+                            <i class="fas fa-info-circle text-info me-1"></i>
+                            信息级别 (INFO)
+                        </h6>
+                        <p class="text-muted small mb-0">任务执行状态、正常操作记录</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-success mb-2">
+                            <i class="fas fa-check-circle text-success me-1"></i>
+                            调试级别 (DEBUG)
+                        </h6>
+                        <p class="text-muted small mb-0">详细的调试信息和系统状态</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function downloadFile(fileName, contentType, base64Content) {
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = `data:${contentType};base64,${base64Content}`;
+        link.click();
+    }
+</script>
