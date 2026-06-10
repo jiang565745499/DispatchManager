@@ -103,6 +103,7 @@ namespace DispatchManager.Core.Libs
                             status = statusElement.GetString() ?? string.Empty;
                             if (status == "000000")
                             {
+                                status = string.Empty;
                                 // 检查是否存在 ds1
                                 if (TryGetDs1FirstItem(task, msgElement, out var firstDs1Item))
                                 {
@@ -153,13 +154,16 @@ namespace DispatchManager.Core.Libs
                                     postResult = postResult + $" ,\"FSourceDeID\":\"{FSourceDeID}\"";
                                     postResult = postResult + "}";
 
-                                    LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    if (task.IsLog)
+                                    {
+                                        LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    }
 
                                     // 记录回调Y9开始时间
                                     var callbackStartTime = DateTime.Now;
 
                                     // 再将返回的结果发送回 Y9
-                                    await DisplayHD(task, postResult, 2);
+                                    status = await DisplayHD(task, postResult, 2);
                                 }
                                 break;
                             }
@@ -216,6 +220,7 @@ namespace DispatchManager.Core.Libs
                             status = statusElement.GetString() ?? string.Empty;
                             if (status == "000000")
                             {
+                                status = string.Empty;
                                 // 检查是否存在 ds1
                                 if (TryGetDs1FirstItem(task, msgElement, out var firstDs1Item))
                                 {
@@ -266,13 +271,16 @@ namespace DispatchManager.Core.Libs
                                     postResult = postResult + $" ,\"FSourceDeID\":\"{FSourceDeID}\"";
                                     postResult = postResult + "}";
 
-                                    LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    if (task.IsLog)
+                                    {
+                                        LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    }
 
                                     // 记录回调Y9开始时间
                                     var callbackStartTime = DateTime.Now;
 
                                     // 再将返回的结果发送回 Y9
-                                    await DisplayHD(task, postResult, 2);
+                                    status = await DisplayHD(task, postResult, 2);
                                 }
                                 break;
                             }
@@ -330,6 +338,7 @@ namespace DispatchManager.Core.Libs
                             status = statusElement.GetString() ?? string.Empty;
                             if (status == "000000")
                             {
+                                status = string.Empty;
                                 // 检查是否存在 ds1
                                 if (TryGetDs1FirstItem(task, msgElement, out var firstDs1Item))
                                 {
@@ -380,13 +389,16 @@ namespace DispatchManager.Core.Libs
                                     postResult = postResult + $" ,\"FSourceDeID\":\"{FSourceDeID}\"";
                                     postResult = postResult + "}";
 
-                                    LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    if (task.IsLog)
+                                    {
+                                        LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    }
 
                                     // 记录回调Y9开始时间
                                     var callbackStartTime = DateTime.Now;
 
                                     // 再将返回的结果发送回 Y9
-                                    await DisplayHD(task, postResult, 2);
+                                    status = await DisplayHD(task, postResult, 2);
                                 }
                                 break;
                             }
@@ -416,7 +428,8 @@ namespace DispatchManager.Core.Libs
                 TimeSpan ETime = new TimeSpan(DateTime.Now.Ticks);
                 // 获取回调结果内容
                 var resultContent = await ResultLast.Content.ReadAsStringAsync();
-                LogHelperUtil.WriteInterInfo(new Logging.Custom.LogContent($@"接口:http://192.168.190.68:43068/PCodeClient/api.ashx?cmd=api568143返回 耗时{ETime.Subtract(Stime).Duration().TotalMilliseconds}毫秒 内容:{resultContent}", task.ID));
+                if (task.IsLog)
+                    LogHelperUtil.WriteInterInfo(new Logging.Custom.LogContent($@"接口:http://192.168.190.68:43068/PCodeClient/api.ashx?cmd=api568143返回 耗时{ETime.Subtract(Stime).Duration().TotalMilliseconds}毫秒 内容:{resultContent}", task.ID));
                 if (!ResultLast.IsSuccessStatusCode || resultContent.Contains("重复执行"))
                 {
                     return await DisplayHD(task, postResult, retryCount);

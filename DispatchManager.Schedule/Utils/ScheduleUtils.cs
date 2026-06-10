@@ -43,12 +43,18 @@ namespace DispatchManager.Schedule.Utils
             {
                 taskLogService = provider.GetRequiredService<SqliteLogService>();
 
+                if (IsTaskDisabled(provider, task))
+                {
+                    LogTaskInfo(taskLogService, task, "任务已禁用，跳过本次执行");
+                    return;
+                }
+
                 // 记录任务开始执行
                 TaskStatisticsService.RecordTaskStart(task.Name);
 
                 // 获取最新的Y9密钥
                 var updatedTaskView = GetUpdatedTaskView(provider, task);
-                
+
                 if (task.IsDllTask)
                 {
                     // 执行DLL任务
@@ -316,6 +322,16 @@ namespace DispatchManager.Schedule.Utils
             }
         }
 
+        private static bool IsTaskDisabled(IServiceProvider provider, DispatchTask task)
+        {
+            var scheduleTaskService = provider.GetRequiredService<ScheduleTaskService>();
+            var latestTask = task.ID.HasValue
+                ? scheduleTaskService.GetDispatchTaskByID(task.ID)
+                : scheduleTaskService.GetDispatchTaskByName(task.Name);
+
+            return latestTask?.Status == SchedulerStatus.Disabled;
+        }
+
         /// <summary>
         /// 获取最新的任务视图，包含最新的Y9密钥
         /// </summary>
@@ -325,12 +341,12 @@ namespace DispatchManager.Schedule.Utils
         private static DispatchTaskView GetUpdatedTaskView(IServiceProvider provider, DispatchTask task)
         {
             var taskView = new DispatchTaskView(task);
-            
+
             if (task.ClassID.HasValue)
             {
                 // 从服务提供者中获取DispatchClassService
                 var dispatchClassService = provider.GetRequiredService<DispatchClassService>();
-                
+
                 // 获取最新的DispatchClass信息
                 var taskClass = dispatchClassService.GetDispatchClassByID(task.ClassID.Value);
                 if (taskClass != null)
@@ -338,7 +354,7 @@ namespace DispatchManager.Schedule.Utils
                     taskView.Y9Key = taskClass.Y9Key;
                 }
             }
-            
+
             return taskView;
         }
     }

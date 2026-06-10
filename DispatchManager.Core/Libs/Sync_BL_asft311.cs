@@ -65,6 +65,7 @@ namespace DispatchManager.Core.Libs
         /// <returns></returns>
         public async Task Asft31101_BL(DispatchTaskView taskView)
         {
+            string FSourceDeID = "0";
             try
             {
                 var task = taskView.dispatchTask;
@@ -105,6 +106,7 @@ namespace DispatchManager.Core.Libs
                             status = statusElement.GetString() ?? string.Empty;
                             if (status == "000000")
                             {
+                                status = string.Empty;
                                 // 检查是否存在 ds1
                                 if (TryGetDs1FirstItem(task, msgElement, out var firstDs1Item))
                                 {
@@ -126,7 +128,7 @@ namespace DispatchManager.Core.Libs
                                     }
 
                                     // 处理 FSourceDeID 的类型转换
-                                    string FSourceDeID;
+                                    
                                     if (fSourceDeIDProp.ValueKind == JsonValueKind.Number)
                                     {
                                         FSourceDeID = fSourceDeIDProp.GetInt64().ToString();
@@ -153,10 +155,13 @@ namespace DispatchManager.Core.Libs
                                     postResult = postResult + $" ,\"FSourceDeID\":\"{FSourceDeID}\"";
                                     postResult = postResult + "}";
 
-                                    LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    if (task.IsLog)
+                                    {
+                                        LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    }
 
                                     // 再将返回的结果发送回 Y9
-                                    await Asft311HD(task, postResult, 2);
+                                    status = await Asft311HD(task, postResult, 2);
                                 }
                                 break;
                             }
@@ -164,14 +169,35 @@ namespace DispatchManager.Core.Libs
                     } while (status == "000000");
                 }
             }
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                if(int.TryParse(FSourceDeID, out var sourceDeID))
+                {
+                    string y9Url = $"http://192.168.1.70:42068/PCodeClient/api.ashx?cmd=api568159";
+                    using var client = new HttpClient();
+                    {
+                        var status = string.Empty;
+                        var values = new Dictionary<string, string>
+                            {
+                                {"FCS","1"},
+                                { "FSourceDeID",FSourceDeID}
+                            };
+                        var statusCode = string.Empty;
+                        ConnectUtil.PostResponseWithKey(taskView.dispatchTask, y9Url, values, out statusCode, taskView.Y9Key);
+                    }
+                    ;
+                }
+            }
             catch (Exception ex)
             {
-                LogHelperUtil.WriteInterError(new Logging.Custom.LogContent($"同步 Asft31101_BL 数据时出错: {ex.Message}", 0), ex);
+                LogHelperUtil.WriteInterError(new Logging.Custom.LogContent($"同步 Asft31101_BL 数据时出错: {ex.Message}", taskView.dispatchTask.ID), ex);
             }
         }
 
         public async Task Asft31102_BL(DispatchTaskView taskView)
         {
+            string FSourceDeID = string.Empty;
+
             try
             {
                 var task = taskView.dispatchTask;
@@ -212,6 +238,7 @@ namespace DispatchManager.Core.Libs
                             status = statusElement.GetString() ?? string.Empty;
                             if (status == "000000")
                             {
+                                status = string.Empty;
                                 // 检查是否存在 ds1
                                 if (TryGetDs1FirstItem(task, msgElement, out var firstDs1Item))
                                 {
@@ -233,7 +260,6 @@ namespace DispatchManager.Core.Libs
                                     }
 
                                     // 处理 FSourceDeID 的类型转换
-                                    string FSourceDeID;
                                     if (fSourceDeIDProp.ValueKind == JsonValueKind.Number)
                                     {
                                         FSourceDeID = fSourceDeIDProp.GetInt64().ToString();
@@ -260,10 +286,13 @@ namespace DispatchManager.Core.Libs
                                     postResult = postResult + $" ,\"FSourceDeID\":\"{FSourceDeID}\"";
                                     postResult = postResult + "}";
 
-                                    LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    if (task.IsLog)
+                                    {
+                                        LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    }
 
                                     // 再将返回的结果发送回 Y9
-                                    await Asft311HD(task, postResult, 2);
+                                    status = await Asft311HD(task, postResult, 2);
                                 }
                                 break;
                             }
@@ -271,15 +300,35 @@ namespace DispatchManager.Core.Libs
                     } while (status == "000000");
                 }
             }
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                if (int.TryParse(FSourceDeID, out var sourceDeID))
+                {
+                    string y9Url = $"http://192.168.1.70:42068/PCodeClient/api.ashx?cmd=api568159";
+                    using var client = new HttpClient();
+                    {
+                        var status = string.Empty;
+                        var values = new Dictionary<string, string>
+                            {
+                                {"FCS","1"},
+                                { "FSourceDeID",FSourceDeID}
+                            };
+                        var statusCode = string.Empty;
+                        ConnectUtil.PostResponseWithKey(taskView.dispatchTask, y9Url, values, out statusCode, taskView.Y9Key);
+                    }
+                    ;
+                }
+            }
             catch (Exception ex)
             {
-                LogHelperUtil.WriteInterError(new Logging.Custom.LogContent($"同步 Asft31102_BL 数据时出错: {ex.Message}", 0), ex);
+                LogHelperUtil.WriteInterError(new Logging.Custom.LogContent($"同步 Asft31102_BL 数据时出错: {ex.Message}", taskView.dispatchTask.ID), ex);
             }
         }
 
 
         public async Task Asft31103_BL(DispatchTaskView taskView)
         {
+            string FSourceDeID = string.Empty;
             try
             {
                 var task = taskView.dispatchTask;
@@ -320,6 +369,7 @@ namespace DispatchManager.Core.Libs
                             status = statusElement.GetString() ?? string.Empty;
                             if (status == "000000")
                             {
+                                status = string.Empty;
                                 // 检查是否存在 ds1
                                 if (TryGetDs1FirstItem(task, msgElement, out var firstDs1Item))
                                 {
@@ -341,7 +391,6 @@ namespace DispatchManager.Core.Libs
                                     }
 
                                     // 处理 FSourceDeID 的类型转换
-                                    string FSourceDeID;
                                     if (fSourceDeIDProp.ValueKind == JsonValueKind.Number)
                                     {
                                         FSourceDeID = fSourceDeIDProp.GetInt64().ToString();
@@ -368,10 +417,13 @@ namespace DispatchManager.Core.Libs
                                     postResult = postResult + $" ,\"FSourceDeID\":\"{FSourceDeID}\"";
                                     postResult = postResult + "}";
 
-                                    LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    if (task.IsLog)
+                                    {
+                                        LogHelperUtil.WriteInfo(new Logging.Custom.LogContent($"POST 请求结果: {postResult}", task.ID));
+                                    }
 
                                     // 再将返回的结果发送回 Y9
-                                    await Asft311HD(task, postResult, 2);
+                                    status = await Asft311HD(task, postResult, 2);
                                 }
                                 break;
                             }
@@ -379,9 +431,28 @@ namespace DispatchManager.Core.Libs
                     } while (status == "000000");
                 }
             }
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                if (int.TryParse(FSourceDeID, out var sourceDeID))
+                {
+                    string y9Url = $"http://192.168.1.70:42068/PCodeClient/api.ashx?cmd=api568159";
+                    using var client = new HttpClient();
+                    {
+                        var status = string.Empty;
+                        var values = new Dictionary<string, string>
+                {
+                    {"FCS","1"},
+                    { "FSourceDeID",FSourceDeID}
+                };
+                        var statusCode = string.Empty;
+                        ConnectUtil.PostResponseWithKey(taskView.dispatchTask, y9Url, values, out statusCode, taskView.Y9Key);
+                    }
+                    ;
+                }
+            }
             catch (Exception ex)
             {
-                LogHelperUtil.WriteInterError(new Logging.Custom.LogContent($"同步 Asft31103_BL 数据时出错: {ex.Message}", 0), ex);
+                LogHelperUtil.WriteInterError(new Logging.Custom.LogContent($"同步 Asft31103_BL 数据时出错: {ex.Message}", taskView.dispatchTask.ID), ex);
             }
         }
 
@@ -400,7 +471,8 @@ namespace DispatchManager.Core.Libs
                 TimeSpan ETime = new TimeSpan(DateTime.Now.Ticks);
                 // 获取回调结果内容
                 var resultContent = await ResultLast.Content.ReadAsStringAsync();
-                LogHelperUtil.WriteInterInfo(new Logging.Custom.LogContent($@"接口:http://192.168.1.70:42068/PCodeClient/api.ashx?cmd=api568159返回 耗时{ETime.Subtract(Stime).Duration().TotalMilliseconds}毫秒 内容:{resultContent}", task.ID));
+                if (task.IsLog)
+                    LogHelperUtil.WriteInterInfo(new Logging.Custom.LogContent($@"接口:http://192.168.1.70:42068/PCodeClient/api.ashx?cmd=api568159返回 耗时{ETime.Subtract(Stime).Duration().TotalMilliseconds}毫秒 内容:{resultContent}", task.ID));
                 if (!ResultLast.IsSuccessStatusCode || resultContent.Contains("重复执行"))
                 {
                     return await Asft311HD(task, postResult, retryCount);

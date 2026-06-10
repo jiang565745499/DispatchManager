@@ -19,6 +19,9 @@ namespace DispatchManager.Logging
         // 新的ILogRecorder接口实例（会由DI容器注入）
         private static ILogRecorder? _logRecorder;
 
+        // SqliteLogService实例（会由DI容器注入）
+        private static SqliteLogService? _sqliteLogService;
+
         /// <summary>
         /// 静态构造函数
         /// </summary>
@@ -46,6 +49,22 @@ namespace DispatchManager.Logging
                 _logRecorder = new SerilogLogger();
             }
             return _logRecorder;
+        }
+
+        /// <summary>
+        /// 设置SqliteLogService实例
+        /// </summary>
+        public static void SetSqliteLogService(SqliteLogService? logService)
+        {
+            _sqliteLogService = logService;
+        }
+
+        /// <summary>
+        /// 获取SqliteLogService实例
+        /// </summary>
+        public static SqliteLogService? GetSqliteLogService()
+        {
+            return _sqliteLogService;
         }
 
 
@@ -157,7 +176,9 @@ namespace DispatchManager.Logging
         {
             if (task?.IsLog == true)
             {
-                logService?.WriteDispatchTaskLog(task, message, category: "DispatchTaskHttp");
+                // 如果传入的 logService 为 null，则使用缓存的实例
+                var service = logService ?? GetSqliteLogService();
+                service?.WriteDispatchTaskLog(task, message, category: "DispatchTaskHttp");
             }
         }
 
@@ -168,7 +189,9 @@ namespace DispatchManager.Logging
         {
             if (task?.IsLog == true)
             {
-                logService?.WriteDispatchTaskErrorLog(task, message, ex, "DispatchTaskHttp");
+                // 如果传入的 logService 为 null，则使用缓存的实例
+                var service = logService ?? GetSqliteLogService();
+                service?.WriteDispatchTaskErrorLog(task, message, ex, "DispatchTaskHttp");
             }
         }
 

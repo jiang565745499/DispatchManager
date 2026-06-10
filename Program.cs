@@ -1,6 +1,8 @@
 using BootstrapBlazor.Components;
 using DispatchManager.Components;
 using DispatchManager.Schedule.Service;
+using DispatchManager.DataAccess.FreeSql.Service;
+using DispatchManager.Logging;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +43,10 @@ builder.Services.AddHostedService<DispatchTaskService>();
 builder.Services.AddHostedService<DispatchTaskKingDeeService>();
 #endregion
 var app = builder.Build();
+
+// 初始化 LogHelperUtil 的 SqliteLogService 缓存
+var sqliteLogService = app.Services.GetService<SqliteLogService>();
+LogHelperUtil.SetSqliteLogService(sqliteLogService);
 
 //if (!app.Environment.IsDevelopment())
 //{
