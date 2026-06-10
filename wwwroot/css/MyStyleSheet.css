@@ -3,10 +3,10 @@
 }
 
 /* ============================================
-   动画效果
+   动画效果 - 使用 Liquid Glass 设计系统
    ============================================ */
 .fade-in {
-    animation: fadeIn 0.5s ease-in;
+    animation: fadeIn var(--duration-normal) var(--ease-out);
 }
 
 @keyframes fadeIn {
@@ -15,7 +15,7 @@
 }
 
 .slide-in-left {
-    animation: slideInLeft 0.6s ease-out;
+    animation: slideInLeft var(--duration-normal) var(--ease-out);
 }
 
 @keyframes slideInLeft {
@@ -24,7 +24,7 @@
 }
 
 .slide-in-right {
-    animation: slideInRight 0.6s ease-out;
+    animation: slideInRight var(--duration-normal) var(--ease-out);
 }
 
 @keyframes slideInRight {
@@ -33,44 +33,47 @@
 }
 
 /* ============================================
-   玻璃变型效果
+   玻璃变型效果 - 使用 Liquid Glass 设计系统
    ============================================ */
 .glass-effect {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--glass-white);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-info) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 /* ============================================
-   阴影和边框工具类
+   阴影和边框工具类 - 使用 Liquid Glass 设计系统
    ============================================ */
 .shadow-soft {
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-element);
 }
 
 .shadow-md {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-element-hover);
 }
 
 .shadow-lg {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-glass-lg);
 }
 
 .border-soft {
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    border: 1px solid var(--glass-border);
 }
 
 /* 页面特定的样式 */
 .page-header {
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-    border-bottom: 1px solid #e2e8f0;
+    background: var(--glass-white);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
     padding: 2rem 0;
     margin-bottom: 2rem;
 }

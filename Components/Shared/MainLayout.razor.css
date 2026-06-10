@@ -1,3 +1,69 @@
+/* Liquid Glass 布局样式 */
+.glass-layout {
+    --bb-layout-header-background: var(--glass-white);
+    --bb-layout-sidebar-background: var(--glass-white);
+    --bb-layout-main-background: var(--color-background);
+    --bb-layout-footer-background: var(--glass-white);
+}
+
+.glass-layout .layout-header {
+    background: var(--glass-white) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+}
+
+.glass-layout .layout-side {
+    background: var(--glass-white) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    border-right: 1px solid var(--glass-border) !important;
+}
+
+.glass-layout .layout-banner {
+    background: var(--glass-white) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+}
+
+.glass-layout .layout-footer {
+    background: var(--glass-white) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    border-top: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+    cursor: pointer;
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    transition: all var(--duration-fast) var(--ease-default);
+    color: var(--color-text-secondary);
+}
+
+.theme-toggle:hover {
+    background: var(--glass-white-light);
+    color: var(--color-text-primary);
+}
+
+/* 布局抽屉 */
+.layout-drawer {
+    cursor: pointer;
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    transition: all var(--duration-fast) var(--ease-default);
+    color: var(--color-text-secondary);
+}
+
+.layout-drawer:hover {
+    background: var(--glass-white-light);
+    color: var(--color-text-primary);
+}
+
 .layout-drawer-body {
     padding: 1.5rem;
     background: #ffffff;

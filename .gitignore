@@ -1,9 +1,119 @@
+# =========================
+# .NET 项目忽略文件
+# =========================
+
+# 构建输出
 bin/
 obj/
+publish/
+out/
+
+# Visual Studio 文件
 .vs/
 *.user
 *.suo
-*.log
+*.userosscache
+*.sln.docstates
+*.vspscc
+*.vssscc
+*.builds
+*.pidb
+*.svclog
+*.scc
+
+# VS Code 文件
 .vscode/
+
+# JetBrains IDE 文件
+.idea/
+*.sln.iml
+
+# 用户特定文件
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# NuGet 包
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# 临时文件
+*.tmp
+*.bak
+*.swp
+*.cache
+~$*
+
+# 日志文件
+*.log
+Log/
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# 密钥和证书
+*.pfx
+*.key
+*.pem
+*.cert
+appsettings.Development.json
+secrets.json
+
+# Windows 系统文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS 系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux 系统文件
+*~
+
+# 第三方工具
 .claude/
 .config/
+.workbuddy/
+
+# DLL 目录（第三方依赖）
+DLL/
+
+# 编译缓存
+*.csproj.user
+*.csproj.nuget.dgspec.json
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+project.assets.json
+
+# 测试结果
+TestResults/
+[Tt]est[Rr]esult*/
+
+# 覆盖率报告
+coverage*/
+*.coverage
+*.coveragexml
+
+# 发布配置
+PublishProfiles/
+launchSettings.json
+
+# 前端依赖（如果有）
+node_modules/
+bower_components/
+
+# 环境变量
+.env
+.env.local
+.env.*.local

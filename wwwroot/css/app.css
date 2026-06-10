@@ -1,16 +1,17 @@
 ﻿:root {
-    --bb-header-color: #ffffff;
-    --bb-header-bg: #1e40af;
-    --bb-primary-color: #1e40af;
-    --bb-primary-bg: #dbeafe;
-    --bb-secondary-color: #64748b;
-    --bb-accent-color: #3b82f6;
-    --bb-card-bg: #ffffff;
-    --bb-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --bb-border-color: #e2e8f0;
-    --bb-text-primary: #1e293b;
-    --bb-text-secondary: #64748b;
-    --bb-background: #f8fafc;
+    /* 使用 Liquid Glass 设计系统变量 */
+    --bb-header-color: var(--color-text-primary);
+    --bb-header-bg: var(--glass-white);
+    --bb-primary-color: var(--color-primary);
+    --bb-primary-bg: var(--color-primary-light);
+    --bb-secondary-color: var(--color-text-secondary);
+    --bb-accent-color: var(--color-primary);
+    --bb-card-bg: var(--glass-white);
+    --bb-card-shadow: var(--shadow-glass);
+    --bb-border-color: var(--glass-border);
+    --bb-text-primary: var(--color-text-primary);
+    --bb-text-secondary: var(--color-text-secondary);
+    --bb-background: var(--color-background);
 }
 
 .layout {

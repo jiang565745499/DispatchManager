@@ -10,47 +10,53 @@
 
 @{    var allTasks = TaskServicesManager.ToList().ToTasksModelList();    var dbTasks = MainDb?.GetAllDispatchTask() ?? [];    allTasks.ForEach(task =>    {        var dbTask = dbTasks.FirstOrDefault(t => t.Name == task.Name);        if (dbTask != null)        {            task.ID = dbTask.ID;            task.ApiUrl = dbTask.ApiUrl;            task.ReturnApiUrl = dbTask.ReturnApiUrl;            task.ClassID = dbTask.ClassID;            task.FNo = dbTask.FNo;            task.IsLog = dbTask.IsLog;            task.FISRetry = dbTask.FISRetry;            task.DllPath = dbTask.DllPath;            task.MethodName = dbTask.MethodName;            task.IsDllTask = dbTask.IsDllTask;        }    });    allTasks = allTasks.Where(x => x.ID != null).ToList();    var totalCount = allTasks.Count;    var runningCount = allTasks.Count(t => t.Status == SchedulerStatus.Running);    var readyCount = allTasks.Count(t => t.Status == SchedulerStatus.Ready);    var disabledCount = allTasks.Count(t => t.Status == SchedulerStatus.Disabled);}
 
-<div class="page-container">
-    <div class="content-wrapper">
-        <!-- 统计卡片 -->
-        <div class="row g-4 mb-4">
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3"><i class="fas fa-layer-group fa-3x text-primary"></i></div>
-                    <h4 class="fw-bold mb-2 stat-value">@totalCount</h4>
-                    <small class="text-muted fw-500">总任务数</small>
+<div class="dashboard-page">
+    <div class="dashboard-background"></div>
+    
+    <div class="dashboard-content">
+        <!-- 页面标题区 -->
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">任务调度</h1>
+            <p class="dashboard-subtitle">创建和管理定时任务，支持Cron表达式</p>
+        </div>
+        
+        <!-- 统计卡片区域 -->
+        <div class="dashboard-stats">
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 0ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-layer-group"></i>
                 </div>
+                <div class="stat-card__value">@totalCount</div>
+                <div class="stat-card__label">总任务数</div>
             </div>
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3"><i class="fas fa-play fa-3x text-success"></i></div>
-                    <h4 class="fw-bold mb-2 stat-value">@runningCount</h4>
-                    <small class="text-muted fw-500">运行中</small>
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 100ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-play"></i>
                 </div>
+                <div class="stat-card__value">@runningCount</div>
+                <div class="stat-card__label">运行中</div>
             </div>
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3"><i class="fas fa-pause fa-3x text-warning"></i></div>
-                    <h4 class="fw-bold mb-2 stat-value">@readyCount</h4>
-                    <small class="text-muted fw-500">已停止</small>
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 200ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-pause"></i>
                 </div>
+                <div class="stat-card__value">@readyCount</div>
+                <div class="stat-card__label">已停止</div>
             </div>
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3"><i class="fa-solid fa-ban fa-3x text-danger"></i></div>
-                    <h4 class="fw-bold mb-2 stat-value">@disabledCount</h4>
-                    <small class="text-muted fw-500">已禁用</small>
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 300ms;">
+                <div class="stat-card__icon">
+                    <i class="fa-solid fa-ban"></i>
                 </div>
+                <div class="stat-card__value">@disabledCount</div>
+                <div class="stat-card__label">已禁用</div>
             </div>
         </div>
-
+        
         <!-- 表格卡片 -->
-        <div class="dtc-card fade-in">
-            <div class="dtc-card-header">
-                <div class="dtc-card-header-left">
-                    <h5 class="dtc-card-title">任务调度列表</h5>
-                    <span class="dtc-card-badge">@totalCount 条记录</span>
-                </div>
+        <div class="glass-table-container animate-fade-in-up" style="animation-delay: 400ms;">
+            <div class="glass-table-header">
+                <h3 class="glass-table-title">任务调度列表</h3>
+                <span class="glass-table-badge">@totalCount 条记录</span>
             </div>
             <div class="dtc-card-body">
                 <Table TItem="DispatchTask" ExtendButtonColumnWidth="270" IsFixedHeader="false" SortString="FNo asc"

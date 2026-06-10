@@ -5,79 +5,60 @@
 
 <PageTitle>任务日志</PageTitle>
 
-<div class="page-container">
-    <div class="content-wrapper">
-        <!-- 页面标题 -->
-        @* <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <h2 class="fw-bold mb-1 gradient-text">
-                    <i class="fas fa-file-alt text-primary me-2"></i>
-                    任务日志管理
-                </h2>
-                <p class="text-muted mb-0">查看和分析系统任务的执行日志</p>
-            </div>
-            <div class="text-end">
-                <small class="text-muted">
-                    <i class="fas fa-clock me-1"></i>
-                    最后更新: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-                </small>
-            </div>
-        </div> *@
-
-        <!-- 统计卡片 -->
-        <div class="row g-4 mb-5">
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3">
-                        <i class="fas fa-file-alt fa-3x text-primary"></i>
-                    </div>
-                    <h4 class="fw-bold mb-2 stat-value">@(LogDb?.GetAllLog()?.Count() ?? 0)</h4>
-                    <small class="text-muted fw-500">总日志数</small>
+<div class="dashboard-page">
+    <div class="dashboard-background"></div>
+    
+    <div class="dashboard-content">
+        <!-- 页面标题区 -->
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">任务日志</h1>
+            <p class="dashboard-subtitle">查看和分析系统任务的执行日志</p>
+        </div>
+        
+        <!-- 统计卡片区域 -->
+        <div class="dashboard-stats">
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 0ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-file-alt"></i>
                 </div>
+                <div class="stat-card__value">@(LogDb?.GetAllLog()?.Count() ?? 0)</div>
+                <div class="stat-card__label">总日志数</div>
             </div>
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3">
-                        <i class="fas fa-exclamation-triangle fa-3x text-danger"></i>
-                    </div>
-                    <h4 class="fw-bold mb-2 stat-value">@(LogDb?.GetAllLog()?.Count(l => l.Level?.ToLower() == "error") ?? 0)</h4>
-                    <small class="text-muted fw-500">错误日志</small>
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 100ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-exclamation-triangle"></i>
                 </div>
+                <div class="stat-card__value">@(LogDb?.GetAllLog()?.Count(l => l.Level?.ToLower() == "error") ?? 0)</div>
+                <div class="stat-card__label">错误日志</div>
             </div>
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3">
-                        <i class="fas fa-info-circle fa-3x text-info"></i>
-                    </div>
-                    <h4 class="fw-bold mb-2 stat-value">@(LogDb?.GetAllLog()?.Count(l => l.Level?.ToLower() == "information") ?? 0)</h4>
-                    <small class="text-muted fw-500">信息日志</small>
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 200ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-info-circle"></i>
                 </div>
+                <div class="stat-card__value">@(LogDb?.GetAllLog()?.Count(l => l.Level?.ToLower() == "information") ?? 0)</div>
+                <div class="stat-card__label">信息日志</div>
             </div>
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3">
-                        <i class="fas fa-exclamation-circle fa-3x text-warning"></i>
-                    </div>
-                    <h4 class="fw-bold mb-2 stat-value">@(LogDb?.GetAllLog()?.Count(l => l.Level?.ToLower() == "warn") ?? 0)</h4>
-                    <small class="text-muted fw-500">警告日志</small>
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 300ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-exclamation-circle"></i>
                 </div>
+                <div class="stat-card__value">@(LogDb?.GetAllLog()?.Count(l => l.Level?.ToLower() == "warn") ?? 0)</div>
+                <div class="stat-card__label">警告日志</div>
             </div>
         </div>
-
+        
         <!-- 日志说明卡片 -->
         
 
         <!-- 数据表格 -->
-        <div class="dtc-card fade-in">
-            <div class="dtc-card-header">
-                <div class="dtc-card-header-left">
-                    <h5 class="dtc-card-title">系统日志列表</h5>
-                </div>
-                <div class="dtc-card-header-right">
-                    <button class="btn btn-success btn-sm" @onclick="@ExportLogsToExcel">
+        <div class="glass-table-container animate-fade-in-up" style="animation-delay: 400ms;">
+            <div class="glass-table-header">
+                <h3 class="glass-table-title">系统日志列表</h3>
+                <div class="glass-table-badge">
+                    <button class="glass-button glass-button--sm" @onclick="@ExportLogsToExcel">
                         <i class="fas fa-file-excel me-1"></i>导出Excel
                     </button>
-                    <button class="btn btn-info btn-sm" @onclick="@ExportLogsToCsv">
+                    <button class="glass-button glass-button--sm" @onclick="@ExportLogsToCsv">
                         <i class="fas fa-file-csv me-1"></i>导出CSV
                     </button>
                 </div>

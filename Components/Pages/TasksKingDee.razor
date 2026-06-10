@@ -14,47 +14,53 @@
     var successCount = allTasks.Count(t => t.LastRunResult == TriggerResult.Success);
 }
 
-<div class="page-container">
-    <div class="content-wrapper">
-        <!-- 统计卡片 -->
-        <div class="row g-4 mb-4">
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3"><i class="fas fa-link fa-3x text-primary"></i></div>
-                    <h4 class="fw-bold mb-2 stat-value">@totalCount</h4>
-                    <small class="text-muted fw-500">对接任务数</small>
+<div class="dashboard-page">
+    <div class="dashboard-background"></div>
+    
+    <div class="dashboard-content">
+        <!-- 页面标题区 -->
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">金蝶对接</h1>
+            <p class="dashboard-subtitle">管理金蝶ERP系统对接任务</p>
+        </div>
+        
+        <!-- 统计卡片区域 -->
+        <div class="dashboard-stats">
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 0ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-link"></i>
                 </div>
+                <div class="stat-card__value">@totalCount</div>
+                <div class="stat-card__label">对接任务数</div>
             </div>
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3"><i class="fas fa-play-circle fa-3x text-success"></i></div>
-                    <h4 class="fw-bold mb-2 stat-value">@runningCount</h4>
-                    <small class="text-muted fw-500">运行中</small>
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 100ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-play-circle"></i>
                 </div>
+                <div class="stat-card__value">@runningCount</div>
+                <div class="stat-card__label">运行中</div>
             </div>
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item">
-                    <div class="mb-3"><i class="fas fa-exchange-alt fa-3x text-info"></i></div>
-                    <h4 class="fw-bold mb-2 stat-value">@successCount</h4>
-                    <small class="text-muted fw-500">对接成功</small>
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 200ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-exchange-alt"></i>
                 </div>
+                <div class="stat-card__value">@successCount</div>
+                <div class="stat-card__label">对接成功</div>
             </div>
-            <div class="col-md-3">
-                <div class="modern-card p-4 text-center fade-in stat-card-item stat-system-card">
-                    <div class="mb-3"><i class="fas fa-building fa-3x text-secondary"></i></div>
-                    <h4 class="fw-bold mb-2 stat-value">1</h4>
-                    <small class="text-muted fw-500">金蝶ERP目标系统</small>
+            <div class="stat-card animate-fade-in-up" style="animation-delay: 300ms;">
+                <div class="stat-card__icon">
+                    <i class="fas fa-building"></i>
                 </div>
+                <div class="stat-card__value">1</div>
+                <div class="stat-card__label">金蝶ERP目标系统</div>
             </div>
         </div>
-
+        
         <!-- 表格卡片 -->
-        <div class="dtc-card fade-in">
-            <div class="dtc-card-header">
-                <div class="dtc-card-header-left">
-                    <h5 class="dtc-card-title">金蝶对接任务列表</h5>
-                    <span class="dtc-card-badge">@totalCount 条记录</span>
-                </div>
+        <div class="glass-table-container animate-fade-in-up" style="animation-delay: 400ms;">
+            <div class="glass-table-header">
+                <h3 class="glass-table-title">金蝶对接任务列表</h3>
+                <span class="glass-table-badge">@totalCount 条记录</span>
             </div>
             <div class="dtc-card-body">
                 <Table TItem="DispatchTaskKingDee" ExtendButtonColumnWidth="270" IsFixedHeader="false" SortString="FNo asc"
