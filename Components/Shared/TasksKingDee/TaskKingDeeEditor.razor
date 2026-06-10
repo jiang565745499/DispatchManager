@@ -1,22 +1,22 @@
-﻿@inject DispatchManager.DataAccess.FreeSql.Service.DispatchClassService MainDb
+@inject DispatchManager.DataAccess.FreeSql.Service.DispatchClassService MainDb
 
 <div class="row g-3 form-inline">
     <div class="col-12">
-        <BootstrapInput  @bind-Value="@Value.Name" />
+        <BootstrapInput @bind-Value="@Value.Name" DisplayText="任务名称" />
     </div>
     <div class="col-12">
-        <Select @bind-Value="@Value.ClassID" Items="Items" />
+        <Select @bind-Value="@Value.ClassID" Items="Items" DisplayText="任务分类" />
     </div>
     <div class="col-12">
-        <BootstrapInputNumber @bind-Value="@Value.TimeNumber" />
+        <BootstrapInputNumber @bind-Value="@Value.TimeNumber" DisplayText="时间间隔" />
 
-        <Select @bind-Value="@Value.TimeType" Items="ItemCronSelect" />
+        <Select @bind-Value="@Value.TimeType" Items="ItemCronSelect" DisplayText="时间单位" />
 
         <div class="col-6 "><Button IsOutline="true" OnClick="() => OnCreateCron(Value)" Color="Color.Primary">生成Cron</Button></div>
 
     </div>
     <div class="col-12">
-        <BootstrapInput @bind-Value="@Value.Trigger" />
+        <BootstrapInput @bind-Value="@Value.Trigger" DisplayText="Cron表达式" />
         <button type="button" class="btn btn-primary" @onclick="@(e => IsOpen = true)">获取Cron</button>
         <Drawer IsBackdrop="true" OnCloseAsync="()=>OnCloseDrawer()" Placement="Placement.Right" IsOpen="@IsOpen" AllowResize="true">
             <div class="d-flex justify-content-center align-items-center flex-column" style="height: 100%;--bb-drawer-width: 500px;">
@@ -25,16 +25,16 @@
         </Drawer>
     </div>
     <div class="col-12">
-        <BootstrapInput @bind-Value="@Value.ReturnApiUrl" />
+        <BootstrapInput @bind-Value="@Value.ReturnApiUrl" DisplayText="回调地址" />
     </div>
     <div class="col-12">
-        <BootstrapInput @bind-Value="@Value.KingDeeFormId" />
+        <BootstrapInput @bind-Value="@Value.KingDeeFormId" DisplayText="金蝶表单ID" />
     </div>
     <div class="col-12">
-        <BootstrapInput @bind-Value="@Value.KingDeeFields" />
+        <BootstrapInput @bind-Value="@Value.KingDeeFields" DisplayText="金蝶字段" />
     </div>
     <div class="col-12">
-        <BootstrapInput @bind-Value="@Value.KingDeeFilterString" />
+        <BootstrapInput @bind-Value="@Value.KingDeeFilterString" DisplayText="过滤条件" />
     </div>
     <div class="col-12">
         <Switch ValueChanged="()=>OnValueChanged(Value)" Value="@Value.IsLog" OnColor="Color.Success" OnText="开启日志" OffText="关闭日志"></Switch>

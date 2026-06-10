@@ -1,0 +1,517 @@
+/* ============================================
+   BootstrapBlazor Liquid Glass 主题
+   将 BootstrapBlazor 变量映射到 Liquid Glass 设计系统
+   ============================================ */
+
+:root {
+  /* ============================================
+     BootstrapBlazor 主要颜色变量
+     ============================================ */
+  
+  /* 主色调 - 映射到 Liquid Glass 蓝色 */
+  --bb-primary-color: #007AFF;
+  --bb-primary-bg: rgba(0, 122, 255, 0.1);
+  --bb-primary-border: rgba(0, 122, 255, 0.3);
+  --bb-primary-hover: rgba(0, 122, 255, 0.2);
+  --bb-primary-active: rgba(0, 122, 255, 0.3);
+  --bb-primary-light: rgba(0, 122, 255, 0.05);
+  --bb-primary-dark: #0056CC;
+  
+  /* 成功色 */
+  --bb-success-color: #34C759;
+  --bb-success-bg: rgba(52, 199, 89, 0.1);
+  --bb-success-border: rgba(52, 199, 89, 0.3);
+  --bb-success-hover: rgba(52, 199, 89, 0.2);
+  
+  /* 警告色 */
+  --bb-warning-color: #FF9500;
+  --bb-warning-bg: rgba(255, 149, 0, 0.1);
+  --bb-warning-border: rgba(255, 149, 0, 0.3);
+  --bb-warning-hover: rgba(255, 149, 0, 0.2);
+  
+  /* 危险色 */
+  --bb-danger-color: #FF3B30;
+  --bb-danger-bg: rgba(255, 59, 48, 0.1);
+  --bb-danger-border: rgba(255, 59, 48, 0.3);
+  --bb-danger-hover: rgba(255, 59, 48, 0.2);
+  
+  /* 信息色 */
+  --bb-info-color: #5AC8FA;
+  --bb-info-bg: rgba(90, 200, 250, 0.1);
+  --bb-info-border: rgba(90, 200, 250, 0.3);
+  --bb-info-hover: rgba(90, 200, 250, 0.2);
+  
+  /* 次要色 */
+  --bb-secondary-color: #636366;
+  --bb-secondary-bg: rgba(99, 99, 102, 0.1);
+  --bb-secondary-border: rgba(99, 99, 102, 0.3);
+  
+  /* ============================================
+     BootstrapBlazor 背景和边框
+     ============================================ */
+  
+  /* 头部 */
+  --bb-header-bg: rgba(255, 255, 255, 0.85);
+  --bb-header-color: #1C1C1E;
+  --bb-header-border: rgba(255, 255, 255, 0.3);
+  
+  /* 侧边栏 */
+  --bb-sidebar-bg: rgba(255, 255, 255, 0.85);
+  --bb-sidebar-color: #1C1C1E;
+  --bb-sidebar-border: rgba(255, 255, 255, 0.3);
+  --bb-sidebar-width: 280px;
+  
+  /* 主内容区 */
+  --bb-body-bg: #F2F2F7;
+  --bb-body-color: #1C1C1E;
+  
+  /* 卡片 */
+  --bb-card-bg: rgba(255, 255, 255, 0.85);
+  --bb-card-border: rgba(255, 255, 255, 0.3);
+  --bb-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --bb-card-border-radius: 16px;
+  
+  /* 表格 */
+  --bb-table-bg: transparent;
+  --bb-table-striped-bg: rgba(0, 0, 0, 0.02);
+  --bb-table-hover-bg: rgba(255, 255, 255, 0.6);
+  --bb-table-border-color: rgba(255, 255, 255, 0.15);
+  --bb-table-header-bg: rgba(255, 255, 255, 0.6);
+  --bb-table-header-color: #636366;
+  
+  /* 输入框 */
+  --bb-input-bg: rgba(255, 255, 255, 0.9);
+  --bb-input-border: #d1d5db
+  --bb-input-color: #1C1C1E;
+  --bb-input-focus-border: #007AFF;
+  --bb-input-focus-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  --bb-input-placeholder-color: #8E8E93;
+  
+  /* 按钮 */
+  --bb-btn-border-radius: 12px;
+  --bb-btn-padding-x: 20px;
+  --bb-btn-padding-y: 12px;
+  
+  /* ============================================
+     BootstrapBlazor 布局变量
+     ============================================ */
+  
+  /* 布局 */
+  --bb-layout-header-background: rgba(255, 255, 255, 0.85);
+  --bb-layout-header-color: #1C1C1E;
+  --bb-layout-header-height: 64px;
+  
+  --bb-layout-sidebar-background: rgba(255, 255, 255, 0.85);
+  --bb-layout-sidebar-color: #1C1C1E;
+  --bb-layout-sidebar-width: 280px;
+  
+  --bb-layout-main-background: #F2F2F7;
+  --bb-layout-main-color: #1C1C1E;
+  
+  --bb-layout-footer-background: rgba(255, 255, 255, 0.85);
+  --bb-layout-footer-color: #636366;
+  
+  --bb-layout-banner-background: rgba(255, 255, 255, 0.85);
+  --bb-layout-banner-color: #1C1C1E;
+  
+  /* ============================================
+     BootstrapBlazor 组件变量
+     ============================================ */
+  
+  /* 标签 */
+  --bb-tag-border-radius: 9999px;
+  --bb-tag-padding-x: 12px;
+  --bb-tag-padding-y: 4px;
+  
+  /* 徽章 */
+  --bb-badge-border-radius: 9999px;
+  
+  /* 弹窗 */
+  --bb-modal-bg: rgba(255, 255, 255, 0.85);
+  --bb-modal-border: rgba(255, 255, 255, 0.3);
+  --bb-modal-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+  --bb-modal-border-radius: 20px;
+  
+  /* 下拉菜单 */
+  --bb-dropdown-bg: rgba(255, 255, 255, 0.85);
+  --bb-dropdown-border: rgba(255, 255, 255, 0.3);
+  --bb-dropdown-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  --bb-dropdown-border-radius: 16px;
+  
+  /* 分页 */
+  --bb-pagination-bg: transparent;
+  --bb-pagination-border: rgba(255, 255, 255, 0.3);
+  --bb-pagination-active-bg: rgba(0, 122, 255, 0.15);
+  --bb-pagination-active-border: #007AFF;
+  --bb-pagination-active-color: #007AFF;
+  
+  /* 工具提示 */
+  --bb-tooltip-bg: rgba(30, 30, 30, 0.85);
+  --bb-tooltip-color: #F5F5F7;
+  --bb-tooltip-border-radius: 8px;
+}
+
+/* ============================================
+   深色主题
+   ============================================ */
+
+[data-bs-theme="dark"] {
+  /* 主色调 */
+  --bb-primary-color: #0A84FF;
+  --bb-primary-bg: rgba(10, 132, 255, 0.15);
+  --bb-primary-border: rgba(10, 132, 255, 0.3);
+  --bb-primary-hover: rgba(10, 132, 255, 0.25);
+  --bb-primary-active: rgba(10, 132, 255, 0.35);
+  --bb-primary-light: rgba(10, 132, 255, 0.08);
+  --bb-primary-dark: #409CFF;
+  
+  /* 成功色 */
+  --bb-success-color: #30D158;
+  --bb-success-bg: rgba(48, 209, 88, 0.15);
+  --bb-success-border: rgba(48, 209, 88, 0.3);
+  --bb-success-hover: rgba(48, 209, 88, 0.25);
+  
+  /* 警告色 */
+  --bb-warning-color: #FF9F0A;
+  --bb-warning-bg: rgba(255, 159, 10, 0.15);
+  --bb-warning-border: rgba(255, 159, 10, 0.3);
+  --bb-warning-hover: rgba(255, 159, 10, 0.25);
+  
+  /* 危险色 */
+  --bb-danger-color: #FF453A;
+  --bb-danger-bg: rgba(255, 69, 58, 0.15);
+  --bb-danger-border: rgba(255, 69, 58, 0.3);
+  --bb-danger-hover: rgba(255, 69, 58, 0.25);
+  
+  /* 信息色 */
+  --bb-info-color: #64D2FF;
+  --bb-info-bg: rgba(100, 210, 255, 0.15);
+  --bb-info-border: rgba(100, 210, 255, 0.3);
+  --bb-info-hover: rgba(100, 210, 255, 0.25);
+  
+  /* 次要色 */
+  --bb-secondary-color: #A1A1A6;
+  --bb-secondary-bg: rgba(161, 161, 166, 0.15);
+  --bb-secondary-border: rgba(161, 161, 166, 0.3);
+  
+  /* 背景和边框 */
+  --bb-header-bg: rgba(30, 30, 30, 0.85);
+  --bb-header-color: #F5F5F7;
+  --bb-header-border: rgba(255, 255, 255, 0.15);
+  
+  --bb-sidebar-bg: rgba(30, 30, 30, 0.85);
+  --bb-sidebar-color: #F5F5F7;
+  --bb-sidebar-border: rgba(255, 255, 255, 0.15);
+  
+  --bb-body-bg: #000000;
+  --bb-body-color: #F5F5F7;
+  
+  --bb-card-bg: rgba(30, 30, 30, 0.85);
+  --bb-card-border: rgba(255, 255, 255, 0.15);
+  --bb-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  
+  --bb-table-bg: transparent;
+  --bb-table-striped-bg: rgba(255, 255, 255, 0.05);
+  --bb-table-hover-bg: rgba(30, 30, 30, 0.6);
+  --bb-table-border-color: rgba(255, 255, 255, 0.08);
+  --bb-table-header-bg: rgba(30, 30, 30, 0.6);
+  --bb-table-header-color: #A1A1A6;
+  
+  --bb-input-bg: rgba(30, 30, 30, 0.9);
+  --bb-input-border: #4b5563;
+  --bb-input-color: #F5F5F7;
+  --bb-input-focus-border: #0A84FF;
+  --bb-input-focus-shadow: 0 0 0 3px rgba(10, 132, 255, 0.15);
+  --bb-input-placeholder-color: #8E8E93;
+  
+  /* 布局 */
+  --bb-layout-header-background: rgba(30, 30, 30, 0.85);
+  --bb-layout-header-color: #F5F5F7;
+  
+  --bb-layout-sidebar-background: rgba(30, 30, 30, 0.85);
+  --bb-layout-sidebar-color: #F5F5F7;
+  
+  --bb-layout-main-background: #000000;
+  --bb-layout-main-color: #F5F5F7;
+  
+  --bb-layout-footer-background: rgba(30, 30, 30, 0.85);
+  --bb-layout-footer-color: #A1A1A6;
+  
+  --bb-layout-banner-background: rgba(30, 30, 30, 0.85);
+  --bb-layout-banner-color: #F5F5F7;
+  
+  /* 组件 */
+  --bb-modal-bg: rgba(30, 30, 30, 0.85);
+  --bb-modal-border: rgba(255, 255, 255, 0.15);
+  --bb-modal-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  
+  --bb-dropdown-bg: rgba(30, 30, 30, 0.85);
+  --bb-dropdown-border: rgba(255, 255, 255, 0.15);
+  --bb-dropdown-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  
+  --bb-pagination-bg: transparent;
+  --bb-pagination-border: rgba(255, 255, 255, 0.15);
+  --bb-pagination-active-bg: rgba(10, 132, 255, 0.2);
+  --bb-pagination-active-border: #0A84FF;
+  --bb-pagination-active-color: #0A84FF;
+  
+  --bb-tooltip-bg: rgba(50, 50, 50, 0.85);
+  --bb-tooltip-color: #F5F5F7;
+}
+
+/* ============================================
+   Liquid Glass 效果增强
+   ============================================ */
+
+/* 应用玻璃模糊效果到主要组件 */
+.layout-header,
+.layout-side,
+.layout-banner,
+.layout-footer {
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* 卡片玻璃效果 */
+.card,
+.widget .dropdown-menu,
+.modal-content {
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  background: var(--bb-card-bg) !important;
+  border: 1px solid var(--bb-card-border) !important;
+  box-shadow: var(--bb-card-shadow) !important;
+}
+
+/* 输入框样式 - 排除 Switch 等组件 */
+.form-control:not(.form-check-input):not([type="checkbox"]):not([type="radio"]),
+.form-select,
+.multi-select {
+  background: var(--bb-input-bg) !important;
+  border: 1px solid var(--bb-input-border) !important;
+  color: var(--bb-input-color) !important;
+}
+
+.form-control:not(.form-check-input):not([type="checkbox"]):not([type="radio"]):focus,
+.form-select:focus,
+.multi-select:focus {
+  border-color: var(--bb-input-focus-border) !important;
+  box-shadow: var(--bb-input-focus-shadow) !important;
+}
+
+/* Switch 组件恢复默认样式 */
+.form-switch .form-check-input {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: #dee2e6 !important;
+  border-color: #dee2e6 !important;
+  background-image: none !important;
+  cursor: pointer !important;
+}
+
+.form-switch .form-check-input:checked {
+  background-color: var(--bb-primary-color) !important;
+  border-color: var(--bb-primary-color) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='white' d='M7 10l2-2 4 4 4-4 2 2-6 6z'/%3e%3c/svg%3e") !important;
+}
+
+/* 所有 form-check 元素恢复交互 */
+.form-check {
+  pointer-events: auto !important;
+}
+
+.form-check-input {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* 确保复选框和单选按钮不被遮挡 */
+.form-check-input[type="checkbox"],
+.form-check-input[type="radio"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: white !important;
+  opacity: 1 !important;
+}
+
+/* 下拉菜单玻璃效果 */
+.dropdown-menu {
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  background: var(--bb-dropdown-bg) !important;
+  border: 1px solid var(--bb-dropdown-border) !important;
+  box-shadow: var(--bb-dropdown-shadow) !important;
+}
+
+/* 表格样式增强 */
+.table {
+  --bs-table-bg: var(--bb-table-bg);
+  --bs-table-striped-bg: var(--bb-table-striped-bg);
+  --bs-table-hover-bg: var(--bb-table-hover-bg);
+  border-color: var(--bb-table-border-color);
+}
+
+.table thead th {
+  background: var(--bb-table-header-bg) !important;
+  color: var(--bb-table-header-color) !important;
+  border-bottom: 1px solid var(--bb-table-border-color) !important;
+  font-weight: 600 !important;
+  font-size: 0.8125rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.table tbody tr:hover {
+  background: var(--bb-table-hover-bg) !important;
+}
+
+/* 按钮样式增强 */
+.btn {
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  transition: all 0.15s ease !important;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* 主要按钮 */
+.btn-primary {
+  background: var(--bb-primary-bg) !important;
+  border-color: var(--bb-primary-border) !important;
+  color: var(--bb-primary-color) !important;
+}
+
+.btn-primary:hover {
+  background: var(--bb-primary-hover) !important;
+}
+
+/* 成功按钮 */
+.btn-success {
+  background: var(--bb-success-bg) !important;
+  border-color: var(--bb-success-border) !important;
+  color: var(--bb-success-color) !important;
+}
+
+.btn-success:hover {
+  background: var(--bb-success-hover) !important;
+}
+
+/* 警告按钮 */
+.btn-warning {
+  background: var(--bb-warning-bg) !important;
+  border-color: var(--bb-warning-border) !important;
+  color: var(--bb-warning-color) !important;
+}
+
+.btn-warning:hover {
+  background: var(--bb-warning-hover) !important;
+}
+
+/* 危险按钮 */
+.btn-danger {
+  background: var(--bb-danger-bg) !important;
+  border-color: var(--bb-danger-border) !important;
+  color: var(--bb-danger-color) !important;
+}
+
+.btn-danger:hover {
+  background: var(--bb-danger-hover) !important;
+}
+
+/* 信息按钮 */
+.btn-info {
+  background: var(--bb-info-bg) !important;
+  border-color: var(--bb-info-border) !important;
+  color: var(--bb-info-color) !important;
+}
+
+.btn-info:hover {
+  background: var(--bb-info-hover) !important;
+}
+
+/* 标签样式 */
+.tag {
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-radius: var(--bb-tag-border-radius) !important;
+}
+
+/* 分页样式 */
+.pagination .page-link {
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  background: var(--bb-pagination-bg) !important;
+  border-color: var(--bb-pagination-border) !important;
+}
+
+.pagination .page-item.active .page-link {
+  background: var(--bb-pagination-active-bg) !important;
+  border-color: var(--bb-pagination-active-border) !important;
+  color: var(--bb-pagination-active-color) !important;
+}
+
+/* 搜索框样式 */
+.search-box .form-control {
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  background: var(--bb-input-bg) !important;
+  border: 1px solid var(--bb-input-border) !important;
+  border-radius: 12px !important;
+}
+
+/* 工具栏样式 */
+.table-toolbar {
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+[data-bs-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+[data-bs-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   响应式调整
+   ============================================ */
+
+@media (max-width: 767px) {
+  :root {
+    --bb-layout-sidebar-width: 0px;
+    --bb-layout-header-height: 56px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --bb-layout-sidebar-width: 240px;
+  }
+}

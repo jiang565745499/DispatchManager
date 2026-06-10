@@ -1,26 +1,26 @@
 <div class="row g-3 form-inline">
     <div class="col-12">
         <div class="col-6">
-            <BootstrapInput @bind-Value="@Value.ClassName" />
+            <BootstrapInput @bind-Value="@Value.ClassName" DisplayText="分类名称" />
          </div>
         <div class="col-6">
-            <Select @bind-Value="@Value.FColor" Items="Items" />
+            <Select @bind-Value="@Value.FColor" Items="Items" DisplayText="颜色标识" />
         </div>
     </div>
     <div class="col-12">
-        <BootstrapInput @bind-Value="@Value.Y9Key" />
+        <BootstrapInput @bind-Value="@Value.Y9Key" DisplayText="Y9标识" />
     </div>
 </div>
 <div class="col-12" style="margin-top:22px;">
     <Collapse IsAccordion="true">
         <CollapseItems>
             <CollapseItem Text="金蝶对接配置(点击展开)" TitleColor="Color.Primary">
-                <BootstrapInput @bind-Value="@Value.KingDeeAccountID" />
-                <BootstrapInput @bind-Value="@Value.KingDeeUserName" />
-                <BootstrapInput @bind-Value="@Value.KingDeeAppID" />
-                <BootstrapInput @bind-Value="@Value.KingDeeAppSec" />
-                <BootstrapInput @bind-Value="@Value.KingDeeLCID"/>
-                <BootstrapInput @bind-Value="@Value.KingDeeServerUrl" />
+                <BootstrapInput @bind-Value="@Value.KingDeeAccountID" DisplayText="账户ID" />
+                <BootstrapInput @bind-Value="@Value.KingDeeUserName" DisplayText="用户名" />
+                <BootstrapInput @bind-Value="@Value.KingDeeAppID" DisplayText="应用ID" />
+                <BootstrapInput @bind-Value="@Value.KingDeeAppSec" DisplayText="应用密钥" />
+                <BootstrapInput @bind-Value="@Value.KingDeeLCID" DisplayText="语言ID" />
+                <BootstrapInput @bind-Value="@Value.KingDeeServerUrl" DisplayText="服务器地址" />
             </CollapseItem>
         </CollapseItems>
     </Collapse>

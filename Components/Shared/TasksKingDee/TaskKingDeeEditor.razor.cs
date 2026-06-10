@@ -87,7 +87,8 @@ namespace DispatchManager.Components.Shared.TasksKingDee
 
         private void OnValueChanged(DispatchTaskKingDee model)
         {
-            model.IsLog = !model.IsLog;
+            // Switch 组件已自动切换绑定值，无需手动取反
+            InvokeAsync(StateHasChanged);
         }
 
     }

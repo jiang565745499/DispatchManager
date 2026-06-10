@@ -2,7 +2,7 @@
 @inject IStringLocalizer<App> Localizer
 
 <!DOCTYPE html>
-<html lang="en" data-bs-theme='light'>
+<html lang="zh-CN" data-bs-theme='light'>
 
 <head>
     <meta charset="utf-8" />
@@ -22,7 +22,10 @@
     <Link Href="_content/BootstrapBlazor/css/motronic.min.css" />
     <Link Href="DispatchManager.styles.css" />
     
-    <!-- Liquid Glass 主题文件 -->
+    <!-- BootstrapBlazor Liquid Glass 主题 -->
+    <Link Href="css/bootstrap-blazor-liquid-glass.css" />
+    
+    <!-- Liquid Glass 扩展样式 -->
     <Link Href="css/liquid-glass-theme.css" />
     
     <!-- 自定义 CSS 文件 -->
@@ -34,12 +37,19 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content" style="position:absolute;top:-40px;left:0;background:#007AFF;color:#fff;padding:8px 16px;z-index:10000;border-radius:0 0 8px 0;font-size:14px;text-decoration:none;transition:top 0.15s;">跳转到主要内容</a>
     <Routes @rendermode="new InteractiveServerRenderMode(false)" />
 
     <ReconnectorOutlet ReconnectInterval="5000" @rendermode="new InteractiveServerRenderMode(false)" />
 
     <Script Src="_content/BootstrapBlazor/js/bootstrap.blazor.bundle.min.js"></Script>
     <script src="_framework/blazor.web.js"></script>
+    <script>
+        window.setTheme = (theme) => {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+    </script>
 </body>
 
 </html>

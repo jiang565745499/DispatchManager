@@ -42,7 +42,12 @@
             </div>
         </Footer>
         <NotFound>
-            <p>Sorry, there's nothing at this address.</p>
+            <div style="text-align:center;padding:80px 20px;">
+                <div style="font-size:48px;opacity:0.3;margin-bottom:16px;"><i class="fas fa-compass"></i></div>
+                <h2 style="font-size:20px;font-weight:600;color:var(--color-text-primary);margin-bottom:8px;">页面未找到</h2>
+                <p style="color:var(--color-text-secondary);margin-bottom:24px;">您访问的页面不存在或已被移除</p>
+                <a href="/" class="glass-button glass-button--primary"><i class="fas fa-home me-2"></i>返回主页</a>
+            </div>
         </NotFound>
     </Layout>
 
@@ -123,7 +128,7 @@
 </BootstrapBlazorRoot>
 
 <div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
+    发生了未处理的错误。
+    <a href="" class="reload">重新加载</a>
     <a class="dismiss">🗙</a>
 </div>

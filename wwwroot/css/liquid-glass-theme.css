@@ -132,7 +132,7 @@
 }
 
 /* 深色主题 */
-[data-theme="dark"] {
+[data-bs-theme="dark"] {
   /* 玻璃材质深色 */
   --glass-white: rgba(30, 30, 30, 0.85);
   --glass-white-light: rgba(30, 30, 30, 0.6);
@@ -900,150 +900,425 @@
     background: rgba(255, 255, 255, 0.95);
   }
   
-  [data-theme="dark"] .glass-card,
-  [data-theme="dark"] .glass-button,
-  [data-theme="dark"] .glass-input,
-  [data-theme="dark"] .glass-table-container,
-  [data-theme="dark"] .glass-sidebar,
-  [data-theme="dark"] .glass-topbar {
+  [data-bs-theme="dark"] .glass-card,
+  [data-bs-theme="dark"] .glass-button,
+  [data-bs-theme="dark"] .glass-input,
+  [data-bs-theme="dark"] .glass-table-container,
+  [data-bs-theme="dark"] .glass-sidebar,
+  [data-bs-theme="dark"] .glass-topbar {
     background: rgba(30, 30, 30, 0.95);
   }
 }
 
 /* ============================================
-   现有组件覆盖
+   玻璃特效动画 */
+@keyframes glassShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.glass-shimmer {
+  background: var(--glass-shimmer);
+  background-size: 200% 100%;
+  animation: glassShimmer 3s infinite;
+}
+
+@keyframes glassPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.glass-pulse {
+  animation: glassPulse 2s var(--ease-in-out) infinite;
+}
+
+/* ============================================
+   UX 修复：触摸目标尺寸 (≥44px)
    ============================================ */
 
-/* 覆盖 BootstrapBlazor 默认样式 */
-.layout {
-  --bb-layout-header-background: var(--glass-white);
-  --bb-layout-sidebar-background: var(--glass-white);
-  --bb-layout-main-background: var(--color-background);
-  --bb-layout-footer-background: var(--glass-white);
+/* 表格行操作按钮最小触摸区域 */
+.dtc-card .btn,
+.glass-table-container .btn {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.layout-header {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-bottom: 1px solid var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
+/* 状态点扩大触摸区域 */
+.dtc-dot {
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
 }
 
-.layout-banner {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-bottom: 1px solid var(--glass-border) !important;
+/* 导出按钮触摸区域 */
+.glass-button--sm {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
 }
 
-.layout-side {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-right: 1px solid var(--glass-border) !important;
+/* 主题切换和设置按钮 */
+.theme-toggle,
+.layout-drawer {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.layout-footer {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-top: 1px solid var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
+/* ============================================
+   UX 修复：无障碍增强
+   ============================================ */
+
+/* 状态指示器带文本支持 */
+.status-with-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-badge);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
 }
 
-/* 覆盖现代化卡片样式 */
-.modern-card {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
-  border-radius: var(--radius-xl) !important;
-  box-shadow: var(--glass-shadow) !important;
+.status-with-text--success {
+  background: var(--color-success-light);
+  color: var(--color-success);
 }
 
-.modern-card::before {
+.status-with-text--warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.status-with-text--error {
+  background: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.status-with-text--info {
+  background: var(--color-info-light);
+  color: var(--color-info);
+}
+
+/* 展开/收起按钮视觉提示 */
+.expand-btn::after {
+  content: ' ▼';
+  font-size: 0.7em;
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+
+.expand-btn.expanded::after {
+  transform: rotate(180deg);
+}
+
+/* 颜色选择器可访问性 */
+.color-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.color-swatch__circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--glass-border);
+  flex-shrink: 0;
+}
+
+.color-swatch__label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   UX 修复：响应式布局
+   ============================================ */
+
+/* 统计卡片响应式网格 */
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+@media (max-width: 1200px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}
+
+/* 表格横向滚动提示 */
+.table-responsive-wrapper {
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive-wrapper::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
-  height: 1px;
-  background: var(--glass-highlight);
+  bottom: 0;
+  width: 24px;
+  background: linear-gradient(to right, transparent, var(--glass-white));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-default);
 }
 
-/* 覆盖按钮样式 */
-.modern-button-primary {
-  background: var(--color-primary-glass) !important;
-  border: 1px solid rgba(0, 122, 255, 0.3) !important;
-  color: var(--color-primary) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
+.table-responsive-wrapper:not(:hover)::after {
+  opacity: 0;
 }
 
-.modern-button-secondary {
-  background: var(--glass-white-light) !important;
-  border: 1px solid var(--glass-border) !important;
-  color: var(--color-text-primary) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
+/* ============================================
+   UX 修复：加载状态和骨架屏
+   ============================================ */
+
+/* 骨架屏动画 */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
-/* 覆盖输入框样式 */
-.modern-input {
-  background: var(--glass-white-light) !important;
-  border: 1px solid var(--glass-border) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--glass-white-light) 25%,
+    var(--glass-white) 50%,
+    var(--glass-white-light) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
 }
 
-.modern-input:focus {
+.skeleton-text {
+  height: 16px;
+  margin-bottom: var(--space-2);
+}
+
+.skeleton-text:last-child {
+  width: 60%;
+}
+
+.skeleton-card {
+  height: 120px;
+  border-radius: var(--radius-xl);
+}
+
+.skeleton-table-row {
+  height: 48px;
+  margin-bottom: var(--space-2);
+}
+
+/* 按钮加载状态 */
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-top: -8px;
+  margin-left: -8px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   UX 修复：空状态
+   ============================================ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) var(--space-6);
+  text-align: center;
+}
+
+.empty-state__icon {
+  font-size: 3rem;
+  color: var(--color-text-quaternary);
+  margin-bottom: var(--space-4);
+}
+
+.empty-state__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.empty-state__description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-tertiary);
+  max-width: 400px;
+}
+
+/* ============================================
+   UX 修复：动画优化
+   ============================================ */
+
+/* 减少动画偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .stat-card:hover {
+    transform: none;
+  }
+
+  .glass-card:hover {
+    transform: none;
+  }
+}
+
+/* 动画性能优化 */
+.stat-card,
+.glass-card,
+.glass-button,
+.action-button {
+  will-change: transform, box-shadow;
+}
+
+/* 表格内元素取消入场动画 */
+.glass-table-container .animate-fade-in-up {
+  animation: none;
+}
+
+/* ============================================
+   UX 修复：表格移动端隐藏次要列
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .glass-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .glass-table-container .table {
+    min-width: 600px;
+  }
+}
+
+/* ============================================
+   UX 修复：表单元素交互增强
+   ============================================ */
+
+/* 确保所有表单元素可交互 */
+.form-check,
+.form-switch,
+.form-check-input {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Select 组件触摸区域 */
+.select,
+.form-select {
+  min-height: 44px;
+}
+
+/* 输入框聚焦增强 */
+.form-control:focus {
+  outline: none;
   border-color: var(--color-primary) !important;
   box-shadow: 0 0 0 3px var(--color-primary-light) !important;
 }
 
-/* 覆盖表格样式 */
-.modern-table {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
-  border-radius: var(--radius-xl) !important;
-  box-shadow: var(--glass-shadow) !important;
+/* 禁用状态清晰度 */
+.form-control:disabled,
+.form-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--glass-white-light);
 }
 
-.modern-table thead th {
-  background: var(--glass-white-light) !important;
-  color: var(--color-text-secondary) !important;
-  border-bottom: 1px solid var(--glass-border) !important;
+/* ============================================
+   Glass Badge 样式
+   ============================================ */
+
+.glass-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-badge);
 }
 
-.modern-table tbody tr:hover {
-  background: var(--glass-white-light) !important;
+/* ============================================
+   Dashboard 页面完整样式
+   ============================================ */
+
+/* 页面容器 */
+.dashboard-page {
+  position: relative;
+  min-height: 100vh;
+  padding: var(--space-6);
+  overflow: hidden;
+  background: var(--color-background);
 }
 
-/* 覆盖内容包装器样式 */
-.content-wrapper {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
-  border-radius: var(--radius-2xl) !important;
-  box-shadow: var(--glass-shadow) !important;
-}
-
-/* 覆盖页面容器样式 */
-.page-container {
-  background: var(--color-background) !important;
-}
-
-.page-container::before {
-  content: '';
+/* 背景装饰 */
+.dashboard-background {
   position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: 
     radial-gradient(circle at 20% 20%, rgba(0, 122, 255, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(52, 199, 89, 0.06) 0%, transparent 50%),
@@ -1052,23 +1327,90 @@
   z-index: 0;
 }
 
-.page-container > * {
+/* 主要内容 */
+.dashboard-content {
   position: relative;
   z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* 覆盖统计卡片样式 */
-.stat-card-item {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
-  border-radius: var(--radius-xl) !important;
-  box-shadow: var(--glass-shadow) !important;
-  transition: all var(--duration-normal) var(--ease-default) !important;
+/* 页面标题区 */
+.dashboard-header {
+  margin-bottom: var(--space-8);
+  text-align: center;
 }
 
-.stat-card-item::before {
+.dashboard-title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dashboard-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* 统计卡片区域 - 横版 4 列显示 */
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+/* 内容区域 */
+.dashboard-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-6);
+}
+
+/* 玻璃卡片头部 */
+.glass-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* 快速操作按钮 */
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--glass-white-light);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.action-button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -1079,288 +1421,107 @@
   pointer-events: none;
 }
 
-.stat-card-item:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: var(--glass-shadow-lg) !important;
-  border-color: var(--color-primary) !important;
-}
-
-/* 覆盖信息区域样式 */
-.info-section {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
-  border-radius: var(--radius-xl) !important;
-  box-shadow: var(--glass-shadow) !important;
-}
-
-/* 覆盖数据表格卡片样式 */
-.dtc-card {
-  background: var(--glass-white) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
-  border-radius: var(--radius-xl) !important;
-  box-shadow: var(--glass-shadow) !important;
-}
-
-.dtc-card-header {
-  border-bottom: 1px solid var(--glass-border) !important;
-}
-
-.dtc-card-title {
-  color: var(--color-text-primary) !important;
-}
-
-.dtc-card-badge {
-  background: var(--color-primary-light) !important;
-  color: var(--color-primary) !important;
-}
-
-.dtc-card .table thead th {
-  background: var(--glass-white-light) !important;
-  color: var(--color-text-secondary) !important;
-  border-bottom: 1px solid var(--glass-border) !important;
-}
-
-.dtc-card .table tbody td {
-  border-bottom: 1px solid var(--glass-border-light) !important;
-}
-
-.dtc-card .table tbody tr:hover {
-  background: var(--glass-white-light) !important;
-}
-
-/* 覆盖状态指示器样式 */
-.dtc-dot-success,
-.dtc-dot-running {
-  background: var(--color-success) !important;
-}
-
-.dtc-dot-warning,
-.dtc-dot-ready {
-  background: var(--color-warning) !important;
-}
-
-.dtc-dot-danger {
-  background: var(--color-error) !important;
-}
-
-.dtc-dot-disabled {
-  background: var(--color-text-tertiary) !important;
-}
-
-.dtc-dot-info {
-  background: var(--color-info) !important;
-}
-
-/* 覆盖类型标签样式 */
-.dtc-type-tag {
-  background: var(--color-primary-light) !important;
-  color: var(--color-primary) !important;
-}
-
-/* 覆盖操作按钮样式 */
-.dtc-action-btn {
-  background: var(--glass-white-light) !important;
-  border: 1px solid var(--glass-border) !important;
-  color: var(--color-primary) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-}
-
-.dtc-action-btn:hover {
-  background: var(--color-primary-light) !important;
-  border-color: var(--color-primary) !important;
-}
-
-/* 覆盖分页样式 */
-.dtc-card .table-pagination {
-  border-top: 1px solid var(--glass-border) !important;
-  background: var(--glass-white) !important;
-}
-
-.dtc-card .table-pagination .pagination .page-link {
-  background: var(--glass-white-light) !important;
-  border: 1px solid var(--glass-border) !important;
-  color: var(--color-text-secondary) !important;
-}
-
-.dtc-card .table-pagination .pagination .page-item.active .page-link {
-  background: var(--color-primary-glass) !important;
-  border-color: var(--color-primary) !important;
-  color: var(--color-primary) !important;
-}
-
-.dtc-card .table-pagination .pagination .page-link:hover {
-  background: var(--glass-white) !important;
-  border-color: var(--color-primary) !important;
-}
-
-/* ============================================
-   主题切换按钮样式
-   ============================================ */
-
-.theme-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  background: var(--glass-white-light);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-default);
-  color: var(--color-text-primary);
-}
-
-.theme-toggle:hover {
+.action-button:hover {
   background: var(--glass-white);
-  transform: scale(1.1) rotate(15deg);
-  box-shadow: var(--glass-shadow);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-element-hover);
+  color: inherit;
+  text-decoration: none;
 }
 
-.theme-toggle:active {
-  transform: scale(0.95);
+.action-button:active {
+  transform: translateY(0);
 }
 
-/* ============================================
-   布局设置抽屉样式
-   ============================================ */
-
-.layout-drawer {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  background: var(--glass-white-light);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-default);
-  color: var(--color-text-primary);
-}
-
-.layout-drawer:hover {
-  background: var(--glass-white);
-  transform: scale(1.1);
-  box-shadow: var(--glass-shadow);
-}
-
-.layout-drawer:active {
-  transform: scale(0.95);
-}
-
-/* 布局项目样式 */
-.layout-item {
-  background: var(--glass-white-light);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-4);
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-default);
-}
-
-.layout-item:hover {
-  background: var(--glass-white);
-  transform: scale(1.02);
-  box-shadow: var(--glass-shadow);
-}
-
-.layout-item.active {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-primary-light);
-}
-
-/* 布局预览样式 */
-.layout-left,
-.layout-right,
-.layout-top,
-.layout-body {
-  background: var(--glass-white-light);
-  border-radius: var(--radius-sm);
-}
-
-.layout-left-header,
-.layout-right-header,
-.layout-top {
-  height: 20px;
+.action-button__icon {
+  width: 48px;
+  height: 48px;
   background: var(--color-primary-light);
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-}
-
-.layout-left-body,
-.layout-right-body {
-  flex: 1;
-  background: var(--glass-white-ultra-light);
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-}
-
-.layout-right-footer {
-  height: 15px;
-  background: var(--glass-white-light);
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-}
-
-/* ============================================
-   页脚链接样式
-   ============================================ */
-
-.page-layout-demo-footer-link {
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  font-size: var(--font-size-sm);
-  transition: color var(--duration-fast) var(--ease-default);
-}
-
-.page-layout-demo-footer-link:hover {
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
   color: var(--color-primary);
 }
 
-/* ============================================
-   错误页面样式
-   ============================================ */
-
-#blazor-error-ui {
-  background: var(--glass-white);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--glass-shadow);
-  padding: var(--space-4);
+.action-button__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
 }
 
-#blazor-error-ui .reload {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-weight: var(--font-weight-medium);
+/* 响应式断点 */
+@media (max-width: 1200px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-main {
+    grid-template-columns: 1fr;
+  }
 }
 
-#blazor-error-ui .reload:hover {
-  text-decoration: underline;
+@media (max-width: 768px) {
+  .dashboard-page {
+    padding: var(--space-4);
+  }
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  .dashboard-title {
+    font-size: var(--font-size-2xl);
+  }
+  .dashboard-subtitle {
+    font-size: var(--font-size-base);
+  }
 }
 
-#blazor-error-ui .dismiss {
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  float: right;
-  font-size: var(--font-size-xl);
-  line-height: 1;
-  opacity: 0.7;
-  transition: opacity var(--duration-fast) var(--ease-default);
+/* ============================================
+   深色模式覆盖 - 确保所有组件响应
+   ============================================ */
+
+[data-bs-theme="dark"] .dashboard-page {
+  background: var(--color-background);
 }
 
-#blazor-error-ui .dismiss:hover {
-  opacity: 1;
+[data-bs-theme="dark"] .dashboard-background {
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(10, 132, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(48, 209, 88, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(100, 210, 255, 0.04) 0%, transparent 50%);
+}
+
+[data-bs-theme="dark"] .dashboard-title {
+  background: linear-gradient(135deg, #0A84FF 0%, #64D2FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-bs-theme="dark"] .stat-card {
+  background: var(--glass-white);
+  border-color: var(--glass-border);
+}
+
+[data-bs-theme="dark"] .glass-card-header {
+  border-bottom-color: var(--glass-border);
+}
+
+[data-bs-theme="dark"] .action-button {
+  background: var(--glass-white-light);
+  border-color: var(--glass-border);
+}
+
+[data-bs-theme="dark"] .action-button:hover {
+  background: var(--glass-white);
+}
+
+[data-bs-theme="dark"] .glass-table-container {
+  background: var(--glass-white);
+  border-color: var(--glass-border);
+}
+
+[data-bs-theme="dark"] .glass-table-header {
+  border-bottom-color: var(--glass-border);
 }

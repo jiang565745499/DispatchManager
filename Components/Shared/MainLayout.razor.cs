@@ -1,14 +1,20 @@
 using BootstrapBlazor.Components;
 using DispatchManager.DataAccess.FreeSql.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.JSInterop;
 
 namespace DispatchManager.Components.Shared
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class MainLayout
     {
+        [Inject]
+        [System.Diagnostics.CodeAnalysis.NotNull]
+        private IJSRuntime? JSRuntime { get; set; }
+
         private bool UseTabSet { get; set; } = true;
 
         private string Theme { get; set; } = ""; // "dark" for dark theme
@@ -41,16 +47,11 @@ namespace DispatchManager.Components.Shared
         {
             var menus = new List<MenuItem>
             {
-                //new() { Text = "返回组件库", Icon = "fa-solid fa-fw fa-home", Url = "https://www.blazor.zone/components" },
-                //new() { Text = "Index", Icon = "fa-solid fa-fw fa-flag", Url = "/" , Match = NavLinkMatch.All},
-                new() { Text = "任务系统", Icon = "fa-solid fa-fw fa-home", Url = "/DispatchClass" , Match = NavLinkMatch.All},
+                new() { Text = "主页", Icon = "fa-solid fa-fw fa-home", Url = "/" , Match = NavLinkMatch.All},
+                new() { Text = "任务系统", Icon = "fa-solid fa-fw fa-cogs", Url = "/DispatchClass" , Match = NavLinkMatch.All},
                 new() { Text = "任务调度", Icon = "fa-solid fa-fw fa-flag", Url = "/DispatchTasks" , Match = NavLinkMatch.All},
                 new() { Text = "金蝶对接", Icon = "fa-solid fa-fw fa-table", Url = "/DispatchTasksKingDee" , Match = NavLinkMatch.All},
                 new() { Text = "任务日志", Icon = "fa-solid fa-fw fa-database", Url = "/DispatchLog" , Match = NavLinkMatch.All},
-                // new() { Text = "日志仪表板", Icon = "fa-solid fa-fw fa-chart-pie", Url = "/LogDashboard" , Match = NavLinkMatch.All},
-                // new() { Text = "日志分析报告", Icon = "fa-solid fa-fw fa-file-alt", Url = "/LogAnalysisReport" , Match = NavLinkMatch.All},
-                // new() { Text = "性能指标", Icon = "fa-solid fa-fw fa-chart-line", Url = "/PerformanceMetrics" , Match = NavLinkMatch.All},
-                
             };
 
             return menus;
@@ -59,9 +60,10 @@ namespace DispatchManager.Components.Shared
         /// <summary>
         /// 切换主题
         /// </summary>
-        private void ToggleTheme()
+        private async void ToggleTheme()
         {
             Theme = Theme == "dark" ? "" : "dark";
+            await JSRuntime.InvokeVoidAsync("setTheme", Theme == "dark" ? "dark" : "light");
         }
     }
 }

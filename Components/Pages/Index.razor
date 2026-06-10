@@ -1,9 +1,19 @@
-﻿@page "/"
+@page "/"
 @using DispatchManager.Utils
+@using DispatchManager.Schedule.Extensions
+@using Longbow.Tasks
 @inject ILogger<Index> Log
 @attribute [TabItemOption(Text = "主页", Closable = false)]
 
 <PageTitle>调度管理系统</PageTitle>
+
+@{
+    var allTasks = TaskServicesManager.ToList().ToTasksModelList();
+    var totalCount = allTasks.Count;
+    var runningCount = allTasks.Count(t => t.Status == SchedulerStatus.Running);
+    var readyCount = allTasks.Count(t => t.Status == SchedulerStatus.Ready);
+    var disabledCount = allTasks.Count(t => t.Status == SchedulerStatus.Disabled);
+}
 
 <div class="dashboard-page">
     <div class="dashboard-background"></div>
@@ -21,45 +31,29 @@
                 <div class="stat-card__icon">
                     <i class="fas fa-tasks"></i>
                 </div>
-                <div class="stat-card__value">128</div>
+                <div class="stat-card__value">@totalCount</div>
                 <div class="stat-card__label">总任务数</div>
-                <div class="stat-card__trend">
-                    <span class="trend-up">↑ 12%</span>
-                    <span class="trend-label">较上周</span>
-                </div>
             </div>
             <div class="stat-card animate-fade-in-up" style="animation-delay: 100ms;">
                 <div class="stat-card__icon">
                     <i class="fas fa-play-circle"></i>
                 </div>
-                <div class="stat-card__value">24</div>
+                <div class="stat-card__value">@runningCount</div>
                 <div class="stat-card__label">运行中</div>
-                <div class="stat-card__trend">
-                    <span class="trend-up">↑ 8%</span>
-                    <span class="trend-label">较上周</span>
-                </div>
             </div>
             <div class="stat-card animate-fade-in-up" style="animation-delay: 200ms;">
                 <div class="stat-card__icon">
-                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-pause-circle"></i>
                 </div>
-                <div class="stat-card__value">96</div>
-                <div class="stat-card__label">已完成</div>
-                <div class="stat-card__trend">
-                    <span class="trend-down">↓ 3%</span>
-                    <span class="trend-label">较上周</span>
-                </div>
+                <div class="stat-card__value">@readyCount</div>
+                <div class="stat-card__label">已停止</div>
             </div>
             <div class="stat-card animate-fade-in-up" style="animation-delay: 300ms;">
                 <div class="stat-card__icon">
-                    <i class="fas fa-exclamation-triangle"></i>
+                    <i class="fas fa-ban"></i>
                 </div>
-                <div class="stat-card__value">8</div>
-                <div class="stat-card__label">异常任务</div>
-                <div class="stat-card__trend">
-                    <span class="trend-up">↑ 15%</span>
-                    <span class="trend-label">较上周</span>
-                </div>
+                <div class="stat-card__value">@disabledCount</div>
+                <div class="stat-card__label">已禁用</div>
             </div>
         </div>
         
@@ -72,94 +66,66 @@
                 </div>
                 <div class="row g-4">
                     <div class="col-md-4">
-                        <div class="action-button hover-lift">
+                        <a href="/DispatchTasks" class="action-button hover-lift" style="text-decoration:none;color:inherit;">
                             <div class="action-button__icon">
-                                <i class="fas fa-tasks"></i>
+                                <i class="fas fa-flag"></i>
                             </div>
                             <div class="action-button__label">任务调度</div>
                             <p class="text-muted small mt-2">创建和管理定时任务</p>
-                            <a href="/DispatchTasks" class="glass-button glass-button--primary mt-3">
-                                进入
-                            </a>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-md-4">
-                        <div class="action-button hover-lift">
+                        <a href="/DispatchClass" class="action-button hover-lift" style="text-decoration:none;color:inherit;">
                             <div class="action-button__icon">
                                 <i class="fas fa-cogs"></i>
                             </div>
                             <div class="action-button__label">任务分类</div>
                             <p class="text-muted small mt-2">对任务进行分类管理</p>
-                            <a href="/DispatchClass" class="glass-button glass-button--primary mt-3">
-                                进入
-                            </a>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-md-4">
-                        <div class="action-button hover-lift">
+                        <a href="/DispatchLog" class="action-button hover-lift" style="text-decoration:none;color:inherit;">
                             <div class="action-button__icon">
-                                <i class="fas fa-file-alt"></i>
+                                <i class="fas fa-database"></i>
                             </div>
                             <div class="action-button__label">任务日志</div>
                             <p class="text-muted small mt-2">查看任务执行日志</p>
-                            <a href="/DispatchLog" class="glass-button glass-button--primary mt-3">
-                                进入
-                            </a>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
             
-            <!-- 右侧：系统信息 -->
+            <!-- 右侧：快速开始 -->
             <div class="glass-card animate-fade-in-right" style="animation-delay: 500ms;">
                 <div class="glass-card-header">
-                    <h3 class="glass-card-title">系统信息</h3>
+                    <h3 class="glass-card-title">快速开始</h3>
                 </div>
                 <div class="mb-4">
-                    <h5 class="fw-bold mb-3">
-                        <i class="fas fa-info-circle text-primary me-2"></i>
-                        系统特性
-                    </h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">
-                            <i class="fas fa-check text-success me-2"></i>
-                            支持多种任务类型和触发器
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-check text-success me-2"></i>
-                            实时监控任务执行状态
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-check text-success me-2"></i>
-                            灵活的日志记录和查询
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-check text-success me-2"></i>
-                            支持金蝶系统集成
-                        </li>
-                    </ul>
+                    <div class="d-flex align-items-start mb-3">
+                        <span class="glass-badge me-3" style="min-width:28px;justify-content:center;">1</span>
+                        <div>
+                            <div class="fw-semibold">创建任务分类</div>
+                            <small class="text-muted">在"任务系统"中定义分类和金蝶对接配置</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <span class="glass-badge me-3" style="min-width:28px;justify-content:center;">2</span>
+                        <div>
+                            <div class="fw-semibold">配置定时任务</div>
+                            <small class="text-muted">在"任务调度"中设置 Cron 表达式和请求地址</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <span class="glass-badge me-3" style="min-width:28px;justify-content:center;">3</span>
+                        <div>
+                            <div class="fw-semibold">启动并监控</div>
+                            <small class="text-muted">运行任务后在"任务日志"中查看执行结果</small>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h5 class="fw-bold mb-3">
-                        <i class="fas fa-clock text-primary me-2"></i>
-                        快速开始
-                    </h5>
-                    <div class="mb-3">
-                        <span class="modern-badge bg-primary text-white me-2">1</span>
-                        创建任务分类
-                    </div>
-                    <div class="mb-3">
-                        <span class="glass-badge">2</span>
-                        配置定时任务
-                    </div>
-                    <div class="mb-3">
-                        <span class="glass-badge">3</span>
-                        启动并监控
-                    </div>
-                    <div class="text-muted small">
-                        <i class="fas fa-lightbulb text-warning me-1"></i>
-                        提示：使用侧边栏导航快速切换功能模块
-                    </div>
+                <div class="text-muted small" style="padding-top:12px;border-top:1px solid var(--glass-border);">
+                    <i class="fas fa-lightbulb text-warning me-1"></i>
+                    使用侧边栏导航快速切换功能模块
                 </div>
             </div>
         </div>
@@ -167,10 +133,8 @@
 </div>
 
 @code {
-    // 系统初始化代码可以在这里添加
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        // 可以在这里添加一些初始化逻辑
     }
 }

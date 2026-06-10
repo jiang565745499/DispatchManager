@@ -7,6 +7,7 @@ bin/
 obj/
 publish/
 out/
+skills/
 
 # Visual Studio 文件
 .vs/

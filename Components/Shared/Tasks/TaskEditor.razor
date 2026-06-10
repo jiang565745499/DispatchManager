@@ -2,24 +2,24 @@
 
 <div class="row g-3 form-inline">
     <div class="col-12">
-        <BootstrapInput  @bind-Value="@Value.FNo" />
+        <BootstrapInput @bind-Value="@Value.FNo" DisplayText="序号" />
     </div>
     <div class="col-12">
-        <BootstrapInput  @bind-Value="@Value.Name" />
+        <BootstrapInput @bind-Value="@Value.Name" DisplayText="任务名称" />
     </div>
     <div class="col-12">
-        <Select @bind-Value="@Value.ClassID" Items="Items" />
+        <Select @bind-Value="@Value.ClassID" Items="Items" DisplayText="任务分类" />
     </div>
     <div class="col-12">
-        <BootstrapInputNumber @bind-Value="@Value.TimeNumber" />
+        <BootstrapInputNumber @bind-Value="@Value.TimeNumber" DisplayText="时间间隔" />
 
-        <Select @bind-Value="@Value.TimeType" Items="ItemCronSelect" />
+        <Select @bind-Value="@Value.TimeType" Items="ItemCronSelect" DisplayText="时间单位" />
 
         <div class="col-6 "><Button IsOutline="true" OnClick="() => OnCreateCron(Value)" Color="Color.Primary">生成Cron</Button></div>
 
     </div>
     <div class="col-12">
-        <BootstrapInput @bind-Value="@Value.Trigger" />
+        <BootstrapInput @bind-Value="@Value.Trigger" DisplayText="Cron表达式" />
         <button type="button" class="btn btn-primary" @onclick="@(e => IsOpen = true)">获取Cron</button>
         <Drawer IsBackdrop="true" OnCloseAsync="()=>OnCloseDrawer()" Placement="Placement.Right" IsOpen="@IsOpen" AllowResize="true">
             <div class="d-flex justify-content-center align-items-center flex-column" style="height: 100%;--bb-drawer-width: 500px;">
@@ -28,36 +28,28 @@
         </Drawer>
     </div>
     <div class="col-12">
-        <BootstrapInput @bind-Value="@Value.ApiUrl" />
+        <BootstrapInput @bind-Value="@Value.ApiUrl" DisplayText="请求地址" />
     </div>
     <div class="col-12">
-        <BootstrapInput @bind-Value="@Value.ReturnApiUrl" />
+        <BootstrapInput @bind-Value="@Value.ReturnApiUrl" DisplayText="回调地址" />
     </div>
     <div class="col-12">
-        <Select @bind-Value="@ResponseTypeValue" Items="ItemResponseTypeSelect" />
+        <Select @bind-Value="@ResponseTypeValue" Items="ItemResponseTypeSelect" DisplayText="响应类型" />
     </div>
     <div class="col-12">
-        <Switch ValueChanged="()=>OnValueChanged(Value)" Value="@Value.IsLog" OnColor="Color.Success" OnText="开启日志" OffText="关闭日志"></Switch>
-        <Switch ValueChanged="() => OnFISRetryChanged(Value)" Value="@Value.FISRetry" OnColor="Color.Warning" OnText="开启重试" OffText="关闭重试"></Switch>
-        <Switch ValueChanged="async () => await OnIsDllTaskChanged(Value)" Value="@Value.IsDllTask" OnColor="Color.Info" OnText="DLL任务" OffText="API任务"></Switch>
+        <Switch @bind-Value="@Value.IsLog" OnColor="Color.Success" OnText="开启日志" OffText="关闭日志"></Switch>
+        <Switch @bind-Value="@Value.FISRetry" OnColor="Color.Warning" OnText="开启重试" OffText="关闭重试"></Switch>
+        <Switch @bind-Value="@Value.IsDllTask" OnColor="Color.Info" OnText="DLL任务" OffText="API任务"></Switch>
 
     </div>
-    @* <div class="col-12">
-    </div>
-    <div class="col-12">
-    </div> *@
     @if (Value.IsDllTask)
     {
-        @* <div class="col-12">
-            
-        </div> *@
-        @* <label class="form-label">DLL文件上传</label> *@
         <ButtonUpload TValue="UploadFile" OnChange="OnFileUpload" accept=".dll" IsMultiple="false" ShowProgress ="true"/>
         <div class="col-12">
-            <BootstrapInput @bind-Value="Value.DllPath" PlaceHolder="DLL文件路径" />
+            <BootstrapInput @bind-Value="Value.DllPath" DisplayText="DLL文件路径" PlaceHolder="DLL文件路径" />
         </div>
         <div class="col-12">
-            <BootstrapInput @bind-Value="Value.MethodName" PlaceHolder="要执行的方法名" />
+            <BootstrapInput @bind-Value="Value.MethodName" DisplayText="方法名" PlaceHolder="要执行的方法名" />
         </div>
     }
 </div>

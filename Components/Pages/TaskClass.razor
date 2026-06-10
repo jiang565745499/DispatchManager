@@ -71,7 +71,8 @@
                        ShowDeleteButtonCallback="OnShowButtonCallback"
                        OnQueryAsync="OnQueryAsync"
                        OnDeleteAsync="OnDeleteAsync"
-                       OnSaveAsync="OnSaveAsync">
+                       OnSaveAsync="OnSaveAsync"
+                       ConfirmDelete="true">
                     <TableColumns>
                         <TableColumn @bind-Field="@context.ClassName" Sortable="true" Filterable="false" Searchable="true" TextWrap="true">
                             <Template Context="v">

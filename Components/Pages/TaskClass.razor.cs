@@ -89,6 +89,13 @@ namespace DispatchManager.Components.Pages
             catch (Exception ex)
             {
                 LogHelperUtil.WriteError(new Logging.Custom.LogContent(ex.Message, 0), ex);
+                toastService.Show(new ToastOption()
+                {
+                    PreventDuplicates = true,
+                    Category = ToastCategory.Error,
+                    Title = "查询异常",
+                    Content = "数据加载失败，请稍后重试",
+                });
                 return Task.FromResult(new QueryData<DispatchClass>() { });
             }
         }
@@ -145,7 +152,7 @@ namespace DispatchManager.Components.Pages
             }
             catch (Exception ex) {
                 LogHelperUtil.WriteError(new Logging.Custom.LogContent(ex.Message, 0),ex);
-                return Task.FromResult(true);
+                return Task.FromResult(false);
             }
         }
 

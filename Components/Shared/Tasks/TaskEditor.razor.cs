@@ -111,22 +111,7 @@ namespace DispatchManager.Components.Shared.Tasks
             return Task.CompletedTask;
         }
 
-        private void OnValueChanged(DispatchTask model)
-        {
-            model.IsLog = !model.IsLog;
-        }
 
-        private void OnFISRetryChanged(DispatchTask model)
-        {
-            model.FISRetry = !model.FISRetry;
-        }
-
-        private async Task OnIsDllTaskChanged(DispatchTask model)
-        {
-            model.IsDllTask = !model.IsDllTask;
-            // 触发值变更事件，确保UI更新
-            await ValueChanged.InvokeAsync(Value);
-        }
 
         private async Task OnFileUpload(UploadFile file)
         {
